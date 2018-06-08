@@ -26,8 +26,8 @@
     </row>
     <row width="10.205%p" >
         <key
-            icon="@drawable/comma_full_icon"
-            icon_popup="@drawable/comma_full_popup_icon"
+            icon="@drawable/space_icon"
+            icon_popup="@drawable/space_popup_icon"
             label="，"
             width="14.286%p" >
             <toggle_state

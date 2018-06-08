@@ -183,11 +183,9 @@ public class PinyinIME extends InputMethodService {
 		mGestureListenerSkb = new OnGestureListener(false);
 		mGestureListenerCandidates = new OnGestureListener(true);
 		mGestureDetectorSkb = new GestureDetector(this, mGestureListenerSkb);
-		mGestureDetectorCandidates = new GestureDetector(this,
-				mGestureListenerCandidates);
+		mGestureDetectorCandidates = new GestureDetector(this, mGestureListenerCandidates);
 
-		mEnvironment.onConfigurationChanged(getResources().getConfiguration(),
-				this);
+		mEnvironment.onConfigurationChanged(getResources().getConfiguration(), this);
 	}
 
 	@Override
@@ -274,6 +272,7 @@ public class PinyinIME extends InputMethodService {
 			return false;
 
 		int keyCode = event.getKeyCode();
+		Log.i("lichao", "PinyinIME->processKey->keyCode=" + keyCode);
 		// SHIFT-SPACE is used to switch between Chinese and English
 		// when HKB is on.
 		// SHIFT + SPACE 按键组合处理
@@ -311,11 +310,11 @@ public class PinyinIME extends InputMethodService {
 		} else if (keyCode >= KeyEvent.KEYCODE_0
 				&& keyCode <= KeyEvent.KEYCODE_9) {
 			keyChar = keyCode - KeyEvent.KEYCODE_0 + '0';
-		} else if (keyCode == KeyEvent.KEYCODE_COMMA) {
+		} else if (keyCode == KeyEvent.KEYCODE_COMMA) { // 逗号
 			keyChar = ',';
-		} else if (keyCode == KeyEvent.KEYCODE_PERIOD) {
+		} else if (keyCode == KeyEvent.KEYCODE_PERIOD) {// 句号
 			keyChar = '.';
-		} else if (keyCode == KeyEvent.KEYCODE_SPACE) {
+		} else if (keyCode == KeyEvent.KEYCODE_SPACE) {// 空格键
 			keyChar = ' ';
 		} else if (keyCode == KeyEvent.KEYCODE_APOSTROPHE) {
 			keyChar = '\'';
@@ -334,8 +333,7 @@ public class PinyinIME extends InputMethodService {
 			} else if (mImeState == ImeState.STATE_PREDICT) {
 				return processStatePredict(keyChar, keyCode, event, realAction);
 			} else if (mImeState == ImeState.STATE_COMPOSING) {
-				return processStateEditComposing(keyChar, keyCode, event,
-						realAction);
+				return processStateEditComposing(keyChar, keyCode, event, realAction);
 			}
 		} else {// 符号处理
 			if (0 != keyChar && realAction) {
@@ -448,12 +446,14 @@ public class PinyinIME extends InputMethodService {
 				sendKeyChar('\n');
 				return true;
 			}
+			// 空格键
 			if (keyCode == KeyEvent.KEYCODE_SPACE) {
 				if (!realAction)
 					return true;
 
 				// 发送' '字符给EditText
 				sendKeyChar(' ');
+				Log.e("lichao", "英文状态空格键");
 				return true;
 			}
 		}
@@ -994,6 +994,7 @@ public class PinyinIME extends InputMethodService {
 	 */
 	private void commitResultText(String resultText) {
 		InputConnection ic = getCurrentInputConnection();
+		Log.i("lichao", "PinyinIME->commitResultText->resultText=" + resultText);
 		if (null != ic)
 			ic.commitText(resultText, 1);
 		if (null != mComposingView) {
@@ -1035,6 +1036,7 @@ public class PinyinIME extends InputMethodService {
 			preEdit += '\u3002';
 		else
 			return;
+		Log.e("lichao", "PinyinIME->inputCommaPeriod->preEdit=" + preEdit);
 		commitResultText(preEdit);
 		if (dismissCandWindow)
 			resetCandidateWindow();

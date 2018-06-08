@@ -1,5 +1,6 @@
 package com.idata.bluetoothime;
 
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.inputmethod.InputConnection;
 
@@ -91,6 +92,7 @@ public class EnglishInputProcessor {
 		}
 
 		String result = String.valueOf((char) keyChar);
+		Log.i("lichao", "EnglishInputProcessor->result=" + result);
 		inputContext.commitText(result, result.length());
 		mLastKeyCode = keyCode;
 		return true;

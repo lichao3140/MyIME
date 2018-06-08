@@ -444,15 +444,13 @@ public class InputModeSwitcher {
 	 * 获取当前的输入法模式
 	 * 
 	 * @有效值 
-	 *      MODE_UNSET（未设置输入法模式）、MODE_SKB_CHINESE（中文标准软键盘模式）、MODE_SKB_SYMBOL1_CN
-	 *      （中文符号软键盘一模式）、MODE_SKB_SYMBOL2_CN（中文符号软键盘二模式）、
-	 *      MODE_SKB_ENGLISH_LOWER
-	 *      （英文小写软键盘模式）、MODE_SKB_ENGLISH_UPPER（英文大写软键盘模式
-	 *      ）、MODE_SKB_SYMBOL1_EN（英文符号软键盘一模式
-	 *      ）、MODE_SKB_SYMBOL2_EN（英文符号软键盘二模式）、MODE_SKB_SMILEY
-	 *      （中文笑脸软键盘模式）、MODE_SKB_PHONE_NUM
-	 *      （电话号码软键盘模式）、MODE_SKB_PHONE_SYM（电话号码大写软键盘模式
-	 *      ）、MODE_HKB_CHINESE（中文硬键盘模式）、MODE_HKB_ENGLISH（英文硬键盘模式）。
+	 *      MODE_UNSET（未设置输入法模式）、MODE_SKB_CHINESE（中文标准软键盘模式）、
+	 *      MODE_SKB_SYMBOL1_CN（中文符号软键盘一模式）、MODE_SKB_SYMBOL2_CN（中文符号软键盘二模式）、
+	 *      MODE_SKB_ENGLISH_LOWER（英文小写软键盘模式）、MODE_SKB_ENGLISH_UPPER（英文大写软键盘模式）、
+	 *      MODE_SKB_SYMBOL1_EN（英文符号软键盘一模式）、MODE_SKB_SYMBOL2_EN（英文符号软键盘二模式）、
+	 *      MODE_SKB_SMILEY（中文笑脸软键盘模式）、MODE_SKB_PHONE_NUM（电话号码软键盘模式）、
+	 *      MODE_SKB_PHONE_SYM（电话号码大写软键盘模式）、MODE_HKB_CHINESE（中文硬键盘模式）、
+	 *      MODE_HKB_ENGLISH（英文硬键盘模式）。
 	 * @return
 	 */
 	public int getInputMode() {
