@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.idata.bluetoothime.SkbContainer xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/skb_container_bg"
+    android:orientation="vertical" >
+
+    <ViewFlipper
+        android:id="@+id/alpha_floatable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" >
+
+        <com.idata.bluetoothime.SoftKeyboardView
+            android:id="@+id/alpha_view1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.idata.bluetoothime.SoftKeyboardView
+            android:id="@+id/alpha_view2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </ViewFlipper>
+
+</com.idata.bluetoothime.SkbContainer>
