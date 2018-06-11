@@ -67,10 +67,8 @@
         width="20%p" >
         <key id="6" />
         <key id="4" />
-        <key
-            code="62"
-            key_type="5"
-            width="30.608%p" />
+        <key code="62" key_type="5" width="15.3%p"/>
+    	<key code="-304" label="@string/key_cn_usb" width="15.3%p"/>
         <key
             icon="@drawable/period_full_icon"
             icon_popup="@drawable/period_full_popup_icon"
@@ -84,10 +82,8 @@
         width="20%p" >
         <key id="6" />
         <key id="4" />
-        <key
-            code="62"
-            key_type="5"
-            width="30.608%p" />
+        <key code="62" key_type="5" width="15.3%p"/>
+    	<key code="-304" label="@string/key_cn_usb" width="15.3%p"/>
         <key id="7" />
         <key id="1" />
     </row>

@@ -63,7 +63,8 @@
   <row width="14.696%p" key_type="1">
     <key id="6"/>
     <key code="-3" key_type="2" label="\?123"/>
-    <key code="62" key_type="5" width="30.608%p"/>
+    <key code="62" key_type="5" width="15.3%p"/>
+    <key code="-304" label="@string/key_cn_usb" width="15.3%p"/>
     <key label="。" icon="@drawable/period_full_icon"
       icon_popup="@drawable/period_full_popup_icon"/>
     <key id="1"/>

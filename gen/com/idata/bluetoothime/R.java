@@ -205,6 +205,7 @@ public final class R {
         public static final int ime_name=0x7f090001;
         public static final int ime_settings_activity_name=0x7f090002;
         public static final int key_cn_symbol=0x7f09003b;
+        public static final int key_cn_usb=0x7f09003c;
         public static final int none_found_device=0x7f09002f;
         public static final int none_paired=0x7f09002e;
         public static final int not_connected=0x7f090027;

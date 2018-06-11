@@ -56,6 +56,13 @@
         code="62"
         icon="@drawable/space_icon"
         icon_popup="@drawable/space_popup_icon" />
+    
+    <!-- Default icons for USB key -->
+    <key_icon
+        code="-304"
+        height="25%p"
+        key_type="3"
+        label="@string/key_cn_usb" />
 
     <!-- Default icons for delete key -->
     <key_icon
