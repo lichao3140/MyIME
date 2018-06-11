@@ -2,4 +2,5 @@
 
 <resources>
   <dimen name="candview_background_padding">0dip</dimen>
+  <dimen name="key_height">60.0dip</dimen>
 </resources>

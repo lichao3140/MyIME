@@ -43,7 +43,7 @@
             android:configChanges="orientation|keyboardHidden"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:screenOrientation="portrait"
-            android:label="@string/app_name"
+            android:label="@string/ime_connect_activity_test"
             android:theme="@android:style/Theme.Black.NoTitleBar" />
         
         <service
@@ -62,7 +62,7 @@
         <service android:name="com.idata.bluetoothime.PinyinDecoderService" />
         <service android:name="com.idata.bluetoothime.BluetoothService" />
 
-        <receiver android:name=".MyReceiver" >
+        <receiver android:name="com.idata.bluetoothime.MyReceiver" >
             <intent-filter>
                 <action android:name="android.intent.idatachina.RFID.BARCODE.SCANINFO" />
             </intent-filter>

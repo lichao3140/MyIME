@@ -9,6 +9,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Vibrator;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import com.idata.bluetoothime.SoftKeyboard.KeyRow;
 
@@ -493,6 +494,7 @@ public class SoftKeyboardView extends View {
 		Environment env = Environment.getInstance();
 		mNormalKeyTextSize = env.getKeyTextSize(false);
 		mFunctionKeyTextSize = env.getKeyTextSize(true);
+		//Log.e("lichao", "功能文字大小:" + mFunctionKeyTextSize);
 		// Draw the last soft keyboard
 		int rowNum = mSoftKeyboard.getRowNum();
 		int keyXMargin = mSoftKeyboard.getKeyXMargin();

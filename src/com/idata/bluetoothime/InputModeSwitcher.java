@@ -80,6 +80,11 @@ public class InputModeSwitcher {
 	 * {@link #MASK_SKB_LAYOUT} to get its soft keyboard layout. 指明电话软键盘
 	 */
 	private static final int MASK_SKB_LAYOUT_PHONE = 0x50000000;
+	
+	/**
+	 * iData Setting
+	 */
+	private static final int MASK_SKB_LAYOUT_IDATA = 0x60000000;
 
 	/**
 	 * Used to indicate which language the current input mode is in. If the
@@ -170,8 +175,8 @@ public class InputModeSwitcher {
 	/**
 	 * Mode for inputing smileys with soft keyboard. 中文笑脸软键盘模式
 	 */
-	public static final int MODE_SKB_SMILEY = (MASK_SKB_LAYOUT_SMILEY | MASK_LANGUAGE_CN);
-
+	//public static final int MODE_SKB_SMILEY = (MASK_SKB_LAYOUT_SMILEY | MASK_LANGUAGE_CN);
+	public static final int MODE_SKB_SMILEY = (MASK_SKB_LAYOUT_IDATA | MASK_LANGUAGE_CN);
 	/**
 	 * Mode for inputing phone numbers. 电话号码软键盘模式
 	 */
@@ -482,10 +487,12 @@ public class InputModeSwitcher {
 			return R.xml.skb_sym1;
 		case MASK_SKB_LAYOUT_SYMBOL2:
 			return R.xml.skb_sym2;
-		case MASK_SKB_LAYOUT_SMILEY:
-			return R.xml.skb_smiley;
+		case MASK_SKB_LAYOUT_SMILEY://笑脸
+			//return R.xml.skb_smiley;
 		case MASK_SKB_LAYOUT_PHONE:
 			return R.xml.skb_phone;
+		case MASK_SKB_LAYOUT_IDATA://设置
+			return R.xml.skb_idata;
 		}
 		return 0;
 	}
@@ -570,11 +577,11 @@ public class InputModeSwitcher {
 			newInputMode = ((mInputMode & (~MASK_SKB_LAYOUT)) | sym);
 		} else if (USERDEF_KEYCODE_SMILEY_6 == userKey) {
 			// 笑脸键：显示机器人笑脸图标的按键
-//			if (MODE_SKB_CHINESE == mInputMode) {
-//				newInputMode = MODE_SKB_SMILEY;
-//			} else {
-//				newInputMode = MODE_SKB_CHINESE;
-//			}
+			if (MODE_SKB_CHINESE == mInputMode) {
+				newInputMode = MODE_SKB_SMILEY;
+			} else {
+				newInputMode = MODE_SKB_CHINESE;
+			}
 			Log.i("lichao", "iData设置");
 		} else if (USERDEF_KEYCODE_PHONE_SYM_4 == userKey) {
 			// 电话键：显示“*#{”或者“123”的按键

@@ -454,7 +454,7 @@ public class PinyinIME extends InputMethodService {
 
 				// 发送' '字符给EditText
 				sendKeyChar(' ');
-				Log.e("lichao", "英文状态空格键");
+				Log.i("lichao", "英文状态空格键");
 				return true;
 			}
 		}
@@ -1037,7 +1037,7 @@ public class PinyinIME extends InputMethodService {
 			preEdit += '\u3002';
 		else
 			return;
-		Log.e("lichao", "PinyinIME->inputCommaPeriod->preEdit=" + preEdit);
+		Log.i("lichao", "PinyinIME->inputCommaPeriod->preEdit=" + preEdit);
 		commitResultText(preEdit);
 		if (dismissCandWindow)
 			resetCandidateWindow();
@@ -1248,12 +1248,12 @@ public class PinyinIME extends InputMethodService {
 
 		int keyCode = sKey.getKeyCode();
 		Log.e("lichao", "PinyinIME->responseSoftKeyEvent->keyCode=" + keyCode);
-		if (keyCode == -6) {
-			Intent intent = new Intent();
-			intent.setClass(PinyinIME.this, ConnectActivity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			startActivity(intent);
-		}
+//		if (keyCode == -6) {
+//			Intent intent = new Intent();
+//			intent.setClass(PinyinIME.this, ConnectActivity.class);
+//			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//			startActivity(intent);
+//		}
 		// Process some general keys, including KEYCODE_DEL, KEYCODE_SPACE,
 		// KEYCODE_ENTER and KEYCODE_DPAD_CENTER.
 		if (sKey.isKeyCodeKey()) {// 是系统的keycode

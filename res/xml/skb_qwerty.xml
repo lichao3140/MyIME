@@ -29,7 +29,7 @@
         <key
             icon="@drawable/idata_icon"
             icon_popup="@drawable/idata_popup_icon"
-            label="，"
+            code="-6"
             width="14.286%p" >
             <toggle_state
                 code="-6"
