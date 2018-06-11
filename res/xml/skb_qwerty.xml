@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- 中文键盘 -->
 <keyboard
     balloon="true"
     height="25%p"
@@ -26,14 +27,14 @@
     </row>
     <row width="10.205%p" >
         <key
-            icon="@drawable/space_icon"
-            icon_popup="@drawable/space_popup_icon"
+            icon="@drawable/idata_icon"
+            icon_popup="@drawable/idata_popup_icon"
             label="，"
             width="14.286%p" >
             <toggle_state
                 code="-6"
-                icon="@drawable/smiley_icon"
-                icon_popup="@drawable/smiley_popup_icon"
+                icon="@drawable/idata_icon"
+                icon_popup="@drawable/idata_popup_icon"
                 key_type="2"
                 state_id="@string/toggle_smiley" />
             <toggle_state

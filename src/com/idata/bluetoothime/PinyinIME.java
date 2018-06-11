@@ -272,6 +272,7 @@ public class PinyinIME extends InputMethodService {
 			return false;
 
 		int keyCode = event.getKeyCode();
+		
 		Log.i("lichao", "PinyinIME->processKey->keyCode=" + keyCode);
 		// SHIFT-SPACE is used to switch between Chinese and English
 		// when HKB is on.
@@ -1246,6 +1247,13 @@ public class PinyinIME extends InputMethodService {
 			return;
 
 		int keyCode = sKey.getKeyCode();
+		Log.e("lichao", "PinyinIME->responseSoftKeyEvent->keyCode=" + keyCode);
+		if (keyCode == -6) {
+			Intent intent = new Intent();
+			intent.setClass(PinyinIME.this, ConnectActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(intent);
+		}
 		// Process some general keys, including KEYCODE_DEL, KEYCODE_SPACE,
 		// KEYCODE_ENTER and KEYCODE_DPAD_CENTER.
 		if (sKey.isKeyCodeKey()) {// 是系统的keycode

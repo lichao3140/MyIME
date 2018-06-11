@@ -54,8 +54,8 @@
     <!-- Default icons for space key -->
     <key_icon
         code="62"
-        icon="@drawable/idata_icon"
-        icon_popup="@drawable/idata_popup_icon" />
+        icon="@drawable/space_icon"
+        icon_popup="@drawable/space_popup_icon" />
 
     <!-- Default icons for delete key -->
     <key_icon

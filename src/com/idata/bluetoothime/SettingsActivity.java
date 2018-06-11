@@ -18,6 +18,7 @@ import android.preference.PreferenceScreen;
  * @ClassName SettingsActivity
  * @author LiChao
  */
+@SuppressWarnings("deprecation")
 public class SettingsActivity extends PreferenceActivity implements
 		Preference.OnPreferenceChangeListener {
 
@@ -26,7 +27,7 @@ public class SettingsActivity extends PreferenceActivity implements
 	private CheckBoxPreference mKeySoundPref;
 	private CheckBoxPreference mVibratePref;
 	private CheckBoxPreference mPredictionPref;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

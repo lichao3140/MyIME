@@ -3,7 +3,7 @@
 
     <string name="app_name">iData输入法</string>
     <string name="ime_name">iData输入法</string>
-    <string name="ime_settings_activity_name">iData输入法设置</string>
+    <string name="ime_settings_activity_name">iData输入法</string>
     <!-- version = apk(java) + ime engine + sys dict + [hotlist (TBD)] -->
     <string name="version">1.0.0</string>
 
@@ -32,7 +32,7 @@
     <string name="setting_prediction_key">setting_prediction_key</string>
     <string name="setting_switch_key">setting_switch_key</string>
     <string name="setting_advanced_key">setting_advanced_key</string>
-    <string name="setting">iData输入法设置</string>
+    <string name="setting">iData输入法</string>
     <string name="setting_sound_key_title">按键声音</string>
     <string name="setting_vibrate_title">按键震动</string>
     <string name="setting_prediction_title">联想输入</string>
@@ -42,5 +42,23 @@
     <string name="setting_disabled">关闭</string>
     <string name="setting_others">其它设置</string>
     <string name="setting_others_summary">词典同步等</string>
-    <string name="action_settings"></string>
+    
+    <string name="send">发送</string>
+    <string name="clear">清空</string>
+    <string name="not_connected">未连接设备</string>
+    <string name="bt_not_enabled_leaving">蓝牙未启用</string>
+    <string name="devoice_connecting">蓝牙连接中...</string>
+    <string name="devoice_connected_to">已经连接: </string>
+    <string name="devoice_not_connected">设备未连接</string>
+
+    <string name="scanning">扫描设备...</string>
+    <string name="select_device">选择一个设备连接</string>
+    <string name="none_paired">没有配对的设备</string>
+    <string name="none_found_device">没有发现设备</string>
+    <string name="title_paired_devices">已配对的设备</string>
+    <string name="title_other_devices">其他可用的设备</string>
+    <string name="button_scan">扫描设备</string>
+
+    <string name="connect">连接设备</string>
+    <string name="discoverable">允许发现</string>
 </resources>

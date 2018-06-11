@@ -1,6 +1,7 @@
 package com.idata.bluetoothime;
 
 import android.content.res.Resources;
+import android.util.Log;
 import android.view.inputmethod.EditorInfo;
 import com.idata.bluetoothime.SoftKeyboard.KeyRow;
 
@@ -569,11 +570,12 @@ public class InputModeSwitcher {
 			newInputMode = ((mInputMode & (~MASK_SKB_LAYOUT)) | sym);
 		} else if (USERDEF_KEYCODE_SMILEY_6 == userKey) {
 			// 笑脸键：显示机器人笑脸图标的按键
-			if (MODE_SKB_CHINESE == mInputMode) {
-				newInputMode = MODE_SKB_SMILEY;
-			} else {
-				newInputMode = MODE_SKB_CHINESE;
-			}
+//			if (MODE_SKB_CHINESE == mInputMode) {
+//				newInputMode = MODE_SKB_SMILEY;
+//			} else {
+//				newInputMode = MODE_SKB_CHINESE;
+//			}
+			Log.i("lichao", "iData设置");
 		} else if (USERDEF_KEYCODE_PHONE_SYM_4 == userKey) {
 			// 电话键：显示“*#{”或者“123”的按键
 			if (MODE_SKB_PHONE_NUM == mInputMode) {

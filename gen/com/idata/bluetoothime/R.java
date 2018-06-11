@@ -139,31 +139,61 @@ public final class R {
         public static final int space_popup_icon=0x7f020063;
     }
     public static final class id {
-        public static final int alpha_floatable=0x7f0b0008;
-        public static final int alpha_view1=0x7f0b0009;
-        public static final int alpha_view2=0x7f0b000a;
-        public static final int arrow_left_btn=0x7f0b0001;
-        public static final int arrow_right_btn=0x7f0b0002;
-        public static final int candidate_flipper=0x7f0b0003;
-        public static final int candidate_view1=0x7f0b0004;
-        public static final int candidate_view2=0x7f0b0005;
-        public static final int candidates_container=0x7f0b0000;
-        public static final int composing_view=0x7f0b0007;
-        public static final int floating_container=0x7f0b0006;
+        public static final int alpha_floatable=0x7f0b0015;
+        public static final int alpha_view1=0x7f0b0016;
+        public static final int alpha_view2=0x7f0b0017;
+        public static final int arrow_left_btn=0x7f0b0009;
+        public static final int arrow_right_btn=0x7f0b000a;
+        public static final int btn_connect=0x7f0b0006;
+        public static final int btn_discover=0x7f0b0007;
+        public static final int button_clear=0x7f0b0005;
+        public static final int button_scan=0x7f0b0012;
+        public static final int button_send=0x7f0b0004;
+        public static final int candidate_flipper=0x7f0b000b;
+        public static final int candidate_view1=0x7f0b000c;
+        public static final int candidate_view2=0x7f0b000d;
+        public static final int candidates_container=0x7f0b0008;
+        public static final int composing_view=0x7f0b0014;
+        public static final int edit_text_out=0x7f0b0003;
+        public static final int floating_container=0x7f0b0013;
+        public static final int in=0x7f0b0002;
+        public static final int new_devices=0x7f0b0011;
+        public static final int paired_devices=0x7f0b000f;
+        public static final int title_left_text=0x7f0b0000;
+        public static final int title_new_devices=0x7f0b0010;
+        public static final int title_paired_devices=0x7f0b000e;
+        public static final int title_right_text=0x7f0b0001;
     }
     public static final class layout {
-        public static final int activity_settings=0x7f030000;
-        public static final int floating_container=0x7f030001;
-        public static final int skb_container=0x7f030002;
+        public static final int activity_connect=0x7f030000;
+        public static final int activity_settings=0x7f030001;
+        public static final int device_list=0x7f030002;
+        public static final int device_name=0x7f030003;
+        public static final int floating_container=0x7f030004;
+        public static final int message=0x7f030005;
+        public static final int skb_container=0x7f030006;
     }
     public static final class raw {
         public static final int dict_pinyin=0x7f050000;
     }
     public static final class string {
-        public static final int action_settings=0x7f090024;
         public static final int app_name=0x7f090000;
+        public static final int bt_not_enabled_leaving=0x7f090027;
+        public static final int button_scan=0x7f090031;
+        public static final int clear=0x7f090025;
+        public static final int connect=0x7f090032;
+        public static final int devoice_connected_to=0x7f090029;
+        public static final int devoice_connecting=0x7f090028;
+        public static final int devoice_not_connected=0x7f09002a;
+        public static final int discoverable=0x7f090033;
         public static final int ime_name=0x7f090001;
         public static final int ime_settings_activity_name=0x7f090002;
+        public static final int none_found_device=0x7f09002e;
+        public static final int none_paired=0x7f09002d;
+        public static final int not_connected=0x7f090026;
+        public static final int scanning=0x7f09002b;
+        public static final int select_device=0x7f09002c;
+        public static final int send=0x7f090024;
         public static final int setting=0x7f09001a;
         public static final int setting_advanced_key=0x7f090019;
         public static final int setting_disabled=0x7f090021;
@@ -181,6 +211,8 @@ public final class R {
         public static final int setting_switch_title=0x7f09001e;
         public static final int setting_vibrate_key=0x7f090016;
         public static final int setting_vibrate_title=0x7f09001c;
+        public static final int title_other_devices=0x7f090030;
+        public static final int title_paired_devices=0x7f09002f;
         /**  Used by the toggle keys in soft keyboards. 
          */
         public static final int toggle_cn=0x7f090004;
