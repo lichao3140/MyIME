@@ -32,6 +32,7 @@ public class BluetoothService {
 	private ConnectThread mConnectThread;
 	private ConnectedThread mConnectedThread;
 	private int mState;
+	PinyinIME ss = new PinyinIME();
 
 	// 常量,显示当前的连接状态
 	public static final int STATE_NONE = 0;
@@ -359,10 +360,9 @@ public class BluetoothService {
 					Log.e("lichao", "BluetoothChatService->readStr=" + readStr);
 					Log.e("lichao", "BluetoothChatService->str=" + str);
 					if (bytes > 0) {// 将读取到的消息发到主线程
-//						mHandler.obtainMessage(
-//								ConnectActivity.MESSAGE_READ, bytes, -1,
-//								buffer).sendToTarget();
-						PinyinIME ss = new PinyinIME();
+						mHandler.obtainMessage(
+								ConnectActivity.MESSAGE_READ, bytes, -1,
+								buffer).sendToTarget();
 						ss.pinyinIME.SetText(readStr);
 					} else {
 						Log.e(TAG, "disconnected");

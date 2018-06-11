@@ -276,8 +276,8 @@ public class ConnectActivity extends Activity implements OnClickListener {
 	public void onDestroy() {
 		super.onDestroy();
 		// Í£Ö¹À¶ÑÀ
-		if (mChatService != null)
-			mChatService.stop();
+//		if (mChatService != null)
+//			mChatService.stop();
 		Log.e(TAG, "----onDestroy()");
 	}
 
