@@ -11,6 +11,7 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.res.Configuration;
@@ -33,6 +34,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.CompletionInfo;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
@@ -1322,7 +1324,6 @@ public class PinyinIME extends InputMethodService {
 		}
 	}
 	
-	BluetoothService bs;
 	/**
 	 * iData功能键处理
 	 * @param keyCode
@@ -1341,14 +1342,18 @@ public class PinyinIME extends InputMethodService {
 			startActivity(intentBlutooth);
 			break;
 		case IDATA_KEY_DISCONNECT_BLUETOOTH:
-			//bs.sendMessage();
 			SetText(BluetoothConstant.BLUETOOTH_END_NONE);
+			break;
+		case IDATA_KEY_FUNCTION:
+			showFunctionMenu();
 			break;
 		default:
 			break;
 		}
 	}
 
+	
+	
 	/**
 	 * 显示候选词视图
 	 * 
@@ -1564,6 +1569,31 @@ public class PinyinIME extends InputMethodService {
 		}
 		super.requestHideSelf(flags);
 	}
+	
+	private String[] items = {"条码配置", "发送命令配置扫描器", "读取扫描器信息", "扫描器功能"};
+	/**
+	 * 功能选项对话框
+	 */
+	public void showFunctionMenu() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setIcon(R.drawable.app_icon);
+		builder.setTitle(R.string.Function);
+		builder.setSingleChoiceItems(items, -1, new OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				
+			}
+		});
+		mOptionsDialog = builder.create();
+		Window window = mOptionsDialog.getWindow();
+		WindowManager.LayoutParams lp = window.getAttributes();
+		lp.token = mSkbContainer.getWindowToken();
+		lp.type = WindowManager.LayoutParams.TYPE_APPLICATION_ATTACHED_DIALOG;
+		window.setAttributes(lp);
+		window.addFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+		mOptionsDialog.show();
+	}
 
 	/**
 	 * 选项菜单对话框
@@ -1587,8 +1617,8 @@ public class PinyinIME extends InputMethodService {
 
 							break;
 						case 1:
-							// InputMethodManager.getInstance(PinyinIME.this)
-							// .showInputMethodPicker();
+//							 InputMethodManager.getInstance(PinyinIME.this)
+//							 .showInputMethodPicker();
 							break;
 						}
 					}

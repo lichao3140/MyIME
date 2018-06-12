@@ -89,4 +89,9 @@
     <string name="Test">测试</string>
     <string name="select_bluetoothIME">请勾选蓝牙输入法</string>
     <string name="BeginTest">单击此处开始测试与激活</string>
+    
+    <string name="QuickConfigBarcode">条码配置</string>
+    <string name="SettingScanner">发送命令配置扫描器</string>
+    <string name="ReadScanner">读取扫描器信息</string>
+    <string name="FunctionScanner">扫描器功能</string>
 </resources>
