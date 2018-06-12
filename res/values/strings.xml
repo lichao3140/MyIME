@@ -88,4 +88,5 @@
     <string name="SetLastStep">最后一步：测试与激活</string>
     <string name="Test">测试</string>
     <string name="select_bluetoothIME">请勾选蓝牙输入法</string>
+    <string name="BeginTest">单击此处开始测试与激活</string>
 </resources>

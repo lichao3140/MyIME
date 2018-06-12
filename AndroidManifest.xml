@@ -44,6 +44,14 @@
             android:theme="@android:style/Theme.Dialog" />
         
         <activity
+            android:name=".TestActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:screenOrientation="portrait"
+            android:label="@string/ime_connect_activity_test"
+            android:theme="@android:style/Theme.Black.NoTitleBar" />
+        
+        <activity
             android:name=".ConnectActivity"
             android:configChanges="orientation|keyboardHidden"
             android:windowSoftInputMode="stateAlwaysHidden"

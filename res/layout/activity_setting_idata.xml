@@ -92,11 +92,27 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="20.0dip"
                     android:text="@string/SetThirdStep" />
+                
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
 
-                <Button
-                    android:id="@+id/bt_select"
-                    style="@style/button_yellow"
-                    android:text="@string/SelectBlueDevice" />
+                    <TextView
+                        android:id="@+id/tv_connect_status"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="20.0dip"
+                        android:gravity="center_vertical"
+                        android:textColor="#000"
+                        android:singleLine="true" />
+
+                    <Button
+	                    android:id="@+id/bt_select"
+	                    style="@style/button_yellow"
+	                    android:text="@string/SelectBlueDevice" />
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
