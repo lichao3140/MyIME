@@ -3,7 +3,7 @@
 
     <string name="app_name">蓝牙输入法</string>
     <string name="ime_name">输入法</string>
-    <string name="ime_settings_activity_name">输入法</string>
+    <string name="ime_settings_activity_name">前往输入法设置</string>
     <string name="ime_connect_activity_test">输入法测试</string>
     <!-- version = apk(java) + ime engine + sys dict + [hotlist (TBD)] -->
     <string name="version">1.0.0</string>

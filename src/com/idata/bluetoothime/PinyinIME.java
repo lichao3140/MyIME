@@ -3,6 +3,9 @@ package com.idata.bluetoothime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+
+import com.idata.bluetoothime.ToolsUtil.CallBack;
+
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -37,6 +40,13 @@ import android.widget.PopupWindow;
  * Main class of the Pinyin input method. 输入法服务
  */
 public class PinyinIME extends InputMethodService {
+	
+	private static final int IDATA_KEY_CONNECT_BLUETOOTH = -301;//连接蓝牙
+	private static final int IDATA_KEY_DISCONNECT_BLUETOOTH = -302;//断开蓝牙
+	private static final int IDATA_KEY_OPEN_SCAN = -303;//开启扫描
+	private static final int IDATA_KEY_USB = -304;//USB
+	private static final int IDATA_KEY_FUNCTION = -305;//功能
+	private static final int IDATA_KEY_DEVICE = -306;//设备
 	/**
 	 * TAG for debug.
 	 */
@@ -1248,12 +1258,7 @@ public class PinyinIME extends InputMethodService {
 
 		int keyCode = sKey.getKeyCode();
 		Log.e("lichao", "PinyinIME->responseSoftKeyEvent->keyCode=" + keyCode);
-//		if (keyCode == -6) {
-//			Intent intent = new Intent();
-//			intent.setClass(PinyinIME.this, ConnectActivity.class);
-//			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//			startActivity(intent);
-//		}
+		iDataSoftKeyEvent(keyCode);
 		// Process some general keys, including KEYCODE_DEL, KEYCODE_SPACE,
 		// KEYCODE_ENTER and KEYCODE_DPAD_CENTER.
 		if (sKey.isKeyCodeKey()) {// 是系统的keycode
@@ -1314,6 +1319,28 @@ public class PinyinIME extends InputMethodService {
 				resetToIdleState(false);
 				mSkbContainer.updateInputMode();
 			}
+		}
+	}
+	
+	/**
+	 * iData功能键处理
+	 * @param keyCode
+	 */
+	private void iDataSoftKeyEvent(int keyCode) {
+		Intent intent = new Intent();
+		switch (keyCode) {
+		case IDATA_KEY_DEVICE:
+			intent.setClass(PinyinIME.this, ConnectActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(intent);
+			break;
+		case IDATA_KEY_CONNECT_BLUETOOTH:
+			Intent intentBlutooth = new Intent(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS);
+			intentBlutooth.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(intentBlutooth);
+			break;
+		default:
+			break;
 		}
 	}
 
