@@ -13,7 +13,7 @@
         android:text="@string/ui_title_title" />
 
     <Button
-        android:id="@+id/btnBack"
+        android:id="@+id/bt_back"
         style="@style/button_title_left"
         android:layout_centerVertical="true"
         android:text="@string/ui_title_back" />

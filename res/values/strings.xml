@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">蓝牙输入法</string>
-    <string name="ime_name">输入法</string>
+    <string name="ime_name">蓝牙输入法</string>
     <string name="ime_settings_activity_name">前往输入法设置</string>
     <string name="ime_connect_activity_test">输入法测试</string>
     <!-- version = apk(java) + ime engine + sys dict + [hotlist (TBD)] -->
@@ -72,6 +72,7 @@
     <string name="key_cn_symbol">ALT</string>
     <string name="key_cn_usb">USB</string>
     <string name="ui_title_back">返回</string>
+    <string name="ui_title_complete">完成</string>
     <string name="ui_title_settings">设置</string>
     <string name="ui_title_title">标题</string>
     <string name="SetTitle">如何使用iData输入法</string>
@@ -86,4 +87,5 @@
     <string name="Change">更改</string>
     <string name="SetLastStep">最后一步：测试与激活</string>
     <string name="Test">测试</string>
+    <string name="select_bluetoothIME">请勾选蓝牙输入法</string>
 </resources>
