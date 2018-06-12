@@ -171,7 +171,7 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.bt_test:
 			Intent test =new Intent();
-			test.setClass(IDataSettingActivity.this, TestActivity.class);
+			test.setClass(IDataSettingActivity.this, ConnectActivity.class);
 			test.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(test);
 			break;
@@ -226,6 +226,21 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 				Toast.makeText(this, R.string.bt_not_enabled_leaving, Toast.LENGTH_SHORT).show();
 				finish();
 			}
+		}
+	}
+	
+	/**
+	 * 发送消息
+	 * @param message 消息内容
+	 */
+	public void sendMessage(String message) {
+		if (mChatService.getState() != BluetoothService.STATE_CONNECTED) {
+			Toast.makeText(this, R.string.not_connected, Toast.LENGTH_SHORT).show();
+			return;
+		}
+		if (message.length() > 0) {
+			byte[] send = message.getBytes();
+			mChatService.write(send);
 		}
 	}
 	

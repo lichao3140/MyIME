@@ -34,7 +34,8 @@ public class BluetoothService {
 	private int mState;
 	PinyinIME ss = new PinyinIME();
 
-	// 常量,显示当前的连接状态
+	static BluetoothService bluetoothService;
+	// 常量显示当前的连接状态
 	public static final int STATE_NONE = 0;
 	public static final int STATE_LISTEN = 1;
 	public static final int STATE_CONNECTING = 2;
@@ -119,9 +120,8 @@ public class BluetoothService {
 	/**
 	 * 启动ConnectedThread开始管理一个蓝牙连接
 	 */
-	public synchronized void connected(BluetoothSocket socket,
-			BluetoothDevice device) {
-		Log.e(TAG, "连接 ");
+	public synchronized void connected(BluetoothSocket socket, BluetoothDevice device) {
+		Log.e(TAG, "确认蓝牙配对 ");
 
 		if (mConnectThread != null) {
 			mConnectThread.cancel();
@@ -166,6 +166,13 @@ public class BluetoothService {
 		if (mAcceptThread != null) {
 			mAcceptThread.cancel();
 			mAcceptThread = null;
+		}
+	}
+	
+	public void sendMessage(String message) {
+		if (message.length() > 0) {
+			byte[] send = message.getBytes();
+			write(send);
 		}
 	}
 
@@ -394,9 +401,10 @@ public class BluetoothService {
 		 *            要写的字节
 		 */
 		public void write(byte[] buffer) {
+			int bytes;
 			try {
 				mmOutStream.write(buffer);
-
+				
 				// 把消息传给UI
 				mHandler.obtainMessage(ConnectActivity.MESSAGE_WRITE, -1,
 						-1, buffer).sendToTarget();

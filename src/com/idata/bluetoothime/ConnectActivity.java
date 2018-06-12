@@ -117,6 +117,7 @@ public class ConnectActivity extends Activity implements OnClickListener {
 				String message = edt.getText().toString();
 				sendMessage(message);
 				edt.setText("");
+				//sendMessage(BluetoothConstant.BLUETOOTH_END_NONE);
 			}
 		});
 		mClearButton.setOnClickListener(new OnClickListener() {

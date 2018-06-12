@@ -1322,6 +1322,7 @@ public class PinyinIME extends InputMethodService {
 		}
 	}
 	
+	BluetoothService bs;
 	/**
 	 * iData功能键处理
 	 * @param keyCode
@@ -1330,7 +1331,7 @@ public class PinyinIME extends InputMethodService {
 		Intent intent = new Intent();
 		switch (keyCode) {
 		case IDATA_KEY_DEVICE:
-			intent.setClass(PinyinIME.this, ConnectActivity.class);
+			intent.setClass(PinyinIME.this, DeviceListActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(intent);
 			break;
@@ -1338,6 +1339,10 @@ public class PinyinIME extends InputMethodService {
 			Intent intentBlutooth = new Intent(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS);
 			intentBlutooth.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(intentBlutooth);
+			break;
+		case IDATA_KEY_DISCONNECT_BLUETOOTH:
+			//bs.sendMessage();
+			SetText(BluetoothConstant.BLUETOOTH_END_NONE);
 			break;
 		default:
 			break;
