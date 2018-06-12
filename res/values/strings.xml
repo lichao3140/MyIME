@@ -33,7 +33,7 @@
     <string name="setting_prediction_key">setting_prediction_key</string>
     <string name="setting_switch_key">setting_switch_key</string>
     <string name="setting_advanced_key">setting_advanced_key</string>
-    <string name="setting">输入法</string>
+    <string name="setting">输入法配置</string>
     <string name="setting_sound_key_title">按键声音</string>
     <string name="setting_vibrate_title">按键震动</string>
     <string name="setting_prediction_title">联想输入</string>
@@ -71,4 +71,19 @@
     <string name="gs_about">关于</string>
     <string name="key_cn_symbol">ALT</string>
     <string name="key_cn_usb">USB</string>
+    <string name="ui_title_back">返回</string>
+    <string name="ui_title_settings">设置</string>
+    <string name="ui_title_title">标题</string>
+    <string name="SetTitle">如何使用iData输入法</string>
+    <string name="SetFirstStep">第一步：激活iData输入法</string>
+    <string name="Choose">勾选</string>
+    <string name="PleaseChooseInputMothed">请勾选iData输入法</string>
+    <string name="SetSecondStep">第二步：开启蓝牙，并配对设备，配对码为1234</string>
+    <string name="Open">开启</string>
+    <string name="SetThirdStep">第三步：自动搜索蓝牙设备，并通过蓝牙设备列表，选择所要连接的设备</string>
+    <string name="SelectBlueDevice">选择设备</string>
+    <string name="SetForthStep">第四步：启用iData输入法</string>
+    <string name="Change">更改</string>
+    <string name="SetLastStep">最后一步：测试与激活</string>
+    <string name="Test">测试</string>
 </resources>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/blue_background"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <include layout="@layout/gs_ui_title" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1.0" >
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center" >
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10.0dip"
+                    android:src="@drawable/app_icon" />
+
+                <TextView
+                    style="@style/text_content_first"
+                    android:text="@string/SetTitle" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/l1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/EditTextAddContant"
+                    style="@style/text_content_first"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20.0dip"
+                    android:text="@string/SetFirstStep" />
+
+                <Button
+                    android:id="@+id/ButtonSetInput"
+                    style="@style/button_yellow"
+                    android:text="@string/Choose" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lc"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/EditTextAddContant1"
+                    style="@style/text_content_first"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20.0dip"
+                    android:text="@string/SetSecondStep" />
+
+                <Button
+                    android:id="@+id/ButtonOpenBlue"
+                    style="@style/button_yellow"
+                    android:text="@string/Open" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="vertical" >
+
+                <TextView
+                    style="@style/text_content_first"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20.0dip"
+                    android:text="@string/SetThirdStep" />
+
+                <Button
+                    android:id="@+id/ButtonSet"
+                    style="@style/button_yellow"
+                    android:text="@string/SelectBlueDevice" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="vertical" >
+
+                <TextView
+                    style="@style/text_content_first"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20.0dip"
+                    android:text="@string/SetForthStep" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <Spinner
+                        android:id="@+id/spinner1"
+                        android:layout_width="150.0dip"
+                        android:layout_height="48.0dip"
+                        android:visibility="gone" />
+
+                    <Button
+                        android:id="@+id/BtnChange"
+                        style="@style/button_yellow"
+                        android:text="@string/Change" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="vertical" >
+
+                <TextView
+                    style="@style/text_content_first"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20.0dip"
+                    android:text="@string/SetLastStep" />
+
+                <Button
+                    android:id="@+id/BtnTest"
+                    style="@style/button_yellow"
+                    android:text="@string/Test" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

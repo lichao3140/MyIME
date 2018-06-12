@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LayoutTitle"
+    style="@style/title_background"
+    android:gravity="center" >
+
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/text_14_ffffff_6"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:text="@string/ui_title_title" />
+
+    <Button
+        android:id="@+id/btnBack"
+        style="@style/button_title_left"
+        android:layout_centerVertical="true"
+        android:text="@string/ui_title_back" />
+
+    <Button
+        android:id="@+id/btnSet"
+        style="@style/button_title_right"
+        android:layout_alignRight="@id/tvTitle"
+        android:layout_centerVertical="true"
+        android:text="@string/ui_title_settings"
+        android:visibility="gone" />
+
+</RelativeLayout>
