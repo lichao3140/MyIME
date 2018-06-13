@@ -139,6 +139,7 @@ public class DeviceListActivity extends Activity {
 			}
 		}
 	};
+	
 	private OnItemClickListener mDeviceClickListener = new OnItemClickListener() {
 		public void onItemClick(AdapterView<?> av, View v, int arg2, long arg3) {
 			mBtAdapter.cancelDiscovery();

@@ -3,6 +3,8 @@ package com.idata.bluetoothime;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Method;
+import java.util.Set;
 import java.util.UUID;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -18,7 +20,7 @@ import android.util.Log;
  * 描述：蓝牙服务核心类
  */
 public class BluetoothService {
-	private final String TAG = "BluetoothService";
+	private final static String TAG = "BluetoothService";
 	// 测试数据
 	private static final String NAME = "BluetoothChat";
 
@@ -26,7 +28,7 @@ public class BluetoothService {
 	private static final UUID MY_UUID = UUID
 			.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
-	private final BluetoothAdapter mAdapter;
+	private static BluetoothAdapter mAdapter;
 	private final Handler mHandler;
 	private AcceptThread mAcceptThread;
 	private ConnectThread mConnectThread;
@@ -48,21 +50,17 @@ public class BluetoothService {
 	}
 
 	/**
-	 * 设置当前的连接状态
-	 * 
-	 * @param state
-	 *            连接状态
+	 * 设置当前蓝牙的连接状态
+	 * @param state 连接状态
 	 */
 	private synchronized void setState(int state) {
 		mState = state;
 		// 通知Activity更新UI
-		mHandler.obtainMessage(ConnectActivity.MESSAGE_STATE_CHANGE,
-				state, -1).sendToTarget();
+		mHandler.obtainMessage(ConnectActivity.MESSAGE_STATE_CHANGE, state, -1).sendToTarget();
 	}
 
 	/**
 	 * 返回当前连接状态
-	 * 
 	 */
 	public synchronized int getState() {
 		return mState;
@@ -70,10 +68,9 @@ public class BluetoothService {
 
 	/**
 	 * 开始聊天服务
-	 * 
 	 */
 	public void startChat() {
-		Log.e(TAG, "start ");
+		Log.e(TAG, "start 聊天");
 
 		if (mConnectThread != null) {
 			mConnectThread.cancel();
@@ -94,9 +91,7 @@ public class BluetoothService {
 
 	/**
 	 * 连接远程设备
-	 * 
-	 * @param device
-	 *            连接
+	 * @param device 连接蓝牙
 	 */
 	public synchronized void connect(BluetoothDevice device) {
 
@@ -169,6 +164,39 @@ public class BluetoothService {
 		}
 	}
 	
+	public static void discoverDevice() {
+		//如果正在扫描，先停止扫描，再重新扫描
+		if (mAdapter.isDiscovering()) {
+			mAdapter.cancelDiscovery();
+		}
+		mAdapter.startDiscovery();
+	}
+	
+	//得到配对的设备列表，清除已配对的设备  
+    public static void removePairDevice() {  
+        if(mAdapter != null){  
+            Set<BluetoothDevice> bondedDevices = mAdapter.getBondedDevices();  
+            for(BluetoothDevice device : bondedDevices ){  
+                    unpairDevice(device);  
+            }  
+        }  
+  
+    }  
+  
+    //反射来调用BluetoothDevice.removeBond取消设备的配对  
+    private static void unpairDevice(BluetoothDevice device) {  
+        try {  
+            Method m = device.getClass().getMethod("removeBond", (Class[]) null);  
+            m.invoke(device, (Object[]) null);  
+        } catch (Exception e) {  
+            Log.e(TAG, e.getMessage());  
+        }  
+    }  
+	
+	/**
+	 * 发送消息
+	 * @param message
+	 */
 	public void sendMessage(String message) {
 		if (message.length() > 0) {
 			byte[] send = message.getBytes();
