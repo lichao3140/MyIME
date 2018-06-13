@@ -26,7 +26,7 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 	// 本地蓝牙适配器
 	private BluetoothAdapter mBluetoothAdapter = null;
 	// 成员对象聊天服务
-	private BluetoothService mChatService = null;
+	private static BluetoothService mChatService = null;
 	// 连接设备的名称
 	private String mConnectedDeviceName = null;
 	//private ArrayAdapter<String> mConversationArrayAdapter;
@@ -171,7 +171,7 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.bt_test:
 			Intent test =new Intent();
-			test.setClass(IDataSettingActivity.this, ConnectActivity.class);
+			test.setClass(IDataSettingActivity.this, TestActivity.class);
 			test.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(test);
 			break;
@@ -233,12 +233,13 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 	 * 发送消息
 	 * @param message 消息内容
 	 */
-	public void sendMessage(String message) {
+	public static void sendMessage(String message) {
 		if (mChatService.getState() != BluetoothService.STATE_CONNECTED) {
-			Toast.makeText(this, R.string.not_connected, Toast.LENGTH_SHORT).show();
+			//Toast.makeText(this, R.string.not_connected, Toast.LENGTH_SHORT).show();
 			return;
 		}
 		if (message.length() > 0) {
+			Log.e("lichao", "发送消息" + message);
 			byte[] send = message.getBytes();
 			mChatService.write(send);
 		}
