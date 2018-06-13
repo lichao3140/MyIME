@@ -58,6 +58,7 @@ public class ConfigAdapter extends BaseAdapter implements OnClickListener {
         }
         viewHolder.barCode.setOnClickListener(this); 
         viewHolder.barCode.setImageResource(mImageList.get(position));
+        viewHolder.barCode.setTag(position);
         viewHolder.info.setText(mTextList.get(position));
         return convertView;
 	}

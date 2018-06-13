@@ -1338,7 +1338,7 @@ public class PinyinIME extends InputMethodService {
 			startActivity(intentBlutooth);
 			break;
 		case IDATA_KEY_DISCONNECT_BLUETOOTH:
-			ConnectActivity.sendMessage(BluetoothConstant.BLUETOOTH_END_NONE);
+			
 			break;
 		case IDATA_KEY_FUNCTION:
 			showFunctionMenu();

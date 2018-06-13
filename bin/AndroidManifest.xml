@@ -26,7 +26,7 @@
         android:theme="@android:style/Theme.Black.NoTitleBar" >
         <activity
             android:name=".IDataSettingActivity"
-            android:label="@string/ime_settings_activity_name" >
+            android:launchMode="singleTask" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,10 +38,28 @@
         </activity>
         
         <activity
+            android:name=".ConfigActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@android:style/Theme.Black.NoTitleBar" />
+        
+        <activity
+            android:name=".ImageActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@android:style/Theme.Black.NoTitleBar" />
+        
+        <activity
             android:name=".DeviceListActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/select_device"
             android:theme="@android:style/Theme.Dialog" />
+        
+        <activity
+            android:name=".TestActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:screenOrientation="portrait"
+            android:label="@string/ime_connect_activity_test"
+            android:theme="@android:style/Theme.Black.NoTitleBar" />
         
         <activity
             android:name=".ConnectActivity"

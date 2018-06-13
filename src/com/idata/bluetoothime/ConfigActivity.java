@@ -11,17 +11,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 @SuppressLint("ViewHolder") 
 public class ConfigActivity extends Activity implements InnerItemOnclickListener,
-		OnItemClickListener {
+		OnItemClickListener, OnClickListener {
 	
 	private ListView lv_Config;
 	private ConfigAdapter mAdapter;
@@ -29,6 +31,9 @@ public class ConfigActivity extends Activity implements InnerItemOnclickListener
 	private List<String> textDataList;
     private int[] images = {R.drawable.config_enter, R.drawable.config_exit,
     						  R.drawable.config_39, R.drawable.config_93};
+    
+    private TextView tv_Title;
+    private Button  bt_Back;
     
     private static final String[] infos = {"进入设置模式", "退出设置模式", "显示版本信息", "恢复默认设置"};
 	
@@ -38,6 +43,10 @@ public class ConfigActivity extends Activity implements InnerItemOnclickListener
 		setContentView(R.layout.activity_config);
 		
 		lv_Config = (ListView) findViewById(R.id.lv_config);
+		tv_Title = (TextView) findViewById(R.id.tvTitle);
+		bt_Back = (Button) findViewById(R.id.bt_back);
+		tv_Title.setText(R.string.QuickConfigBarcode);
+		bt_Back.setOnClickListener(this);
 		
 		textDataList = new ArrayList<String>();
 		iamgeDataList = new ArrayList<Integer>();
@@ -46,7 +55,6 @@ public class ConfigActivity extends Activity implements InnerItemOnclickListener
 			iamgeDataList.add(images[i]);
         }
 		
-		
 		mAdapter = new ConfigAdapter(textDataList, iamgeDataList, this);
 		mAdapter.setOnInnerItemOnClickListener(this);
 		lv_Config.setAdapter(mAdapter);
@@ -54,27 +62,38 @@ public class ConfigActivity extends Activity implements InnerItemOnclickListener
 	}
 
 	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		Log.e("lichao", position + "=list");  
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) { 
 		Intent intent = new Intent();
+		intent.putExtra("bar_code", position);
 		intent.setClass(ConfigActivity.this, ImageActivity.class);
 		startActivity(intent);
 	}
 
 	@Override
 	public void itemClick(View v) {
-//		int position;
-//        position = (Integer) v.getTag();
-//        switch (v.getId()) {
-//        case R.id.bt1:  
-//            Log.e("内部item--1-->", position + "");
-//            break;
-//        case R.id.bt2:
-//            Log.e("内部item--2-->", position + "");
-//            break;
-//        default:
-//            break;
-//        }
+		int position;
+        position = (Integer) v.getTag();
+        switch (v.getId()) {
+        case R.id.im_bar_code:
+        	Intent intent = new Intent();
+    		intent.putExtra("bar_code", position);
+    		intent.setClass(ConfigActivity.this, ImageActivity.class);
+    		startActivity(intent);
+            break;
+        default:
+            break;
+        }
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.bt_back:
+			finish();
+			break;
+		default:
+			break;
+		}
 	}
 
 }
