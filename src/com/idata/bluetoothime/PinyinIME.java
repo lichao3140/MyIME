@@ -3,9 +3,6 @@ package com.idata.bluetoothime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
-
-import com.idata.bluetoothime.ToolsUtil.CallBack;
-
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -34,7 +31,6 @@ import android.view.WindowManager;
 import android.view.inputmethod.CompletionInfo;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
@@ -1342,7 +1338,7 @@ public class PinyinIME extends InputMethodService {
 			startActivity(intentBlutooth);
 			break;
 		case IDATA_KEY_DISCONNECT_BLUETOOTH:
-			SetText(BluetoothConstant.BLUETOOTH_END_NONE);
+			ConnectActivity.sendMessage(BluetoothConstant.BLUETOOTH_END_NONE);
 			break;
 		case IDATA_KEY_FUNCTION:
 			showFunctionMenu();
@@ -1570,6 +1566,9 @@ public class PinyinIME extends InputMethodService {
 		super.requestHideSelf(flags);
 	}
 	
+	/**
+	 * 发送命令配置扫描器
+	 */
 	public void showFunctionList() {
 		final String[] items = {"设置前缀", "设置后缀", "蓝牙HID模式", "蓝牙SPP模式", "蓝牙BLE模式",
 				"休眠1分钟", "休眠5分钟", "休眠10分钟", "休眠30分钟", "从不休眠", "立即休眠",
@@ -1583,16 +1582,63 @@ public class PinyinIME extends InputMethodService {
 				dialog.dismiss();
 				switch (which) {
 				case 0:
-					Log.e("lichao", "第一个");
+					Log.e("lichao", "第1个");
 					break;
 				case 1:
-					Log.e("lichao", "第二个");
+					Log.e("lichao", "第2个");
 					break;
 				case 2:
-					Log.e("lichao", "第三个");
+					Log.e("lichao", "第3个");
 					break;
 				case 3:
-					Log.e("lichao", "第四个");
+					Log.e("lichao", "第4个");
+					break;
+				case 4:
+					Log.e("lichao", "第5个");
+					break;
+				case 5:
+					Log.e("lichao", "第6个");
+					break;
+				case 6:
+					Log.e("lichao", "第7个");
+					break;
+				case 7:
+					Log.e("lichao", "第8个");
+					break;
+				case 8:
+					Log.e("lichao", "第9个");
+					break;
+				case 9:
+					Log.e("lichao", "第10个");
+					break;
+				case 10:
+					Log.e("lichao", "第11个");
+					break;
+				case 11:
+					Log.e("lichao", "第12个");
+					break;
+				case 12:
+					Log.e("lichao", "第13个");
+					break;
+				case 13:
+					Log.e("lichao", "第14个");
+					break;
+				case 14:
+					Log.e("lichao", "第15个");
+					break;
+				case 15:
+					Log.e("lichao", "第16个");
+					break;
+				case 16:
+					Log.e("lichao", "第17个");
+					break;
+				case 17:
+					Log.e("lichao", "第18个");
+					ConnectActivity.sendMessage(BluetoothConstant.BLUETOOTH_END_ADD_ENTER);
+					break;
+				case 18:
+					Log.e("lichao", "第19个");
+					ConnectActivity.sendMessage(BluetoothConstant.BLUETOOTH_END_NONE);
 					break;
 				default:
 					break;

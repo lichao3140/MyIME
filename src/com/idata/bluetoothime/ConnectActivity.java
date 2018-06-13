@@ -48,7 +48,7 @@ public class ConnectActivity extends Activity implements OnClickListener {
 	// 本地蓝牙适配器
 	private BluetoothAdapter mBluetoothAdapter = null;
 	// 成员对象聊天服务
-	private BluetoothService mChatService = null;
+	private static BluetoothService mChatService = null;
 	private Button btn_connect, btn_discover;
 
 	@Override
@@ -136,13 +136,13 @@ public class ConnectActivity extends Activity implements OnClickListener {
 	 * @param message
 	 *            发送的内容
 	 */
-	private void sendMessage(String message) {
+	public static void sendMessage(String message) {
 		if (mChatService.getState() != BluetoothService.STATE_CONNECTED) {
-			Toast.makeText(this, R.string.not_connected, Toast.LENGTH_SHORT)
-					.show();
+			//Toast.makeText(this, R.string.not_connected, Toast.LENGTH_SHORT).show();
 			return;
 		}
 		if (message.length() > 0) {
+			Log.e("lichao", "发送消息" + message);
 			byte[] send = message.getBytes();
 			mChatService.write(send);
 		}
