@@ -83,7 +83,7 @@
     <string name="Open">开启</string>
     <string name="SetThirdStep">第三步：自动搜索蓝牙设备，并通过蓝牙设备列表，选择所要连接的设备</string>
     <string name="SelectBlueDevice">选择设备</string>
-    <string name="SetForthStep">第四步：启用iData输入法</string>
+    <string name="SetForthStep">第四步：启用蓝牙输入法</string>
     <string name="Change">更改</string>
     <string name="SetLastStep">最后一步：测试与激活</string>
     <string name="Test">测试</string>
