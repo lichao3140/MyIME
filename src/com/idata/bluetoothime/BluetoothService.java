@@ -6,6 +6,7 @@ import java.io.OutputStream;
 import java.lang.reflect.Method;
 import java.util.Set;
 import java.util.UUID;
+import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothServerSocket;
@@ -19,6 +20,7 @@ import android.util.Log;
 /**
  * 描述：蓝牙服务核心类
  */
+@SuppressLint("Instantiatable") 
 public class BluetoothService {
 	private final static String TAG = "BluetoothService";
 	// 测试数据

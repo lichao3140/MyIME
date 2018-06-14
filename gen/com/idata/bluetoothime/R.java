@@ -8,22 +8,26 @@
 package com.idata.bluetoothime;
 
 public final class R {
+    public static final class array {
+        public static final int idata_commands=0x7f060000;
+        public static final int idata_config=0x7f060001;
+    }
     public static final class attr {
     }
     public static final class bool {
-        public static final int im_is_default=0x7f060000;
+        public static final int im_is_default=0x7f070000;
     }
     public static final class color {
-        public static final int active_candidate_color=0x7f070004;
-        public static final int balloon_color=0x7f070002;
-        public static final int candidate_color=0x7f070003;
-        public static final int composing_color=0x7f070007;
-        public static final int composing_color_hl=0x7f070008;
-        public static final int composing_color_idle=0x7f070009;
-        public static final int footnote_color=0x7f070006;
-        public static final int label_color=0x7f070000;
-        public static final int label_color_hl0=0x7f070001;
-        public static final int recommended_candidate_color=0x7f070005;
+        public static final int active_candidate_color=0x7f080004;
+        public static final int balloon_color=0x7f080002;
+        public static final int candidate_color=0x7f080003;
+        public static final int composing_color=0x7f080007;
+        public static final int composing_color_hl=0x7f080008;
+        public static final int composing_color_idle=0x7f080009;
+        public static final int footnote_color=0x7f080006;
+        public static final int label_color=0x7f080000;
+        public static final int label_color_hl0=0x7f080001;
+        public static final int recommended_candidate_color=0x7f080005;
     }
     public static final class dimen {
         /** 
@@ -31,11 +35,11 @@ public final class R {
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f080004;
-        public static final int candidate_margin_left_right=0x7f080002;
-        public static final int candview_background_padding=0x7f080000;
-        public static final int composing_height=0x7f080003;
-        public static final int key_height=0x7f080001;
+        public static final int activity_horizontal_margin=0x7f090004;
+        public static final int candidate_margin_left_right=0x7f090002;
+        public static final int candview_background_padding=0x7f090000;
+        public static final int composing_height=0x7f090003;
+        public static final int key_height=0x7f090001;
     }
     public static final class drawable {
         public static final int app_icon=0x7f020000;
@@ -160,53 +164,53 @@ public final class R {
         public static final int title_btn_r_normal=0x7f020077;
     }
     public static final class id {
-        public static final int EditTextAddContant=0x7f0b000e;
-        public static final int EditTextAddContant1=0x7f0b0011;
-        public static final int LayoutTitle=0x7f0b0028;
-        public static final int alpha_floatable=0x7f0b002c;
-        public static final int alpha_view1=0x7f0b002d;
-        public static final int alpha_view2=0x7f0b002e;
-        public static final int arrow_left_btn=0x7f0b0019;
-        public static final int arrow_right_btn=0x7f0b001a;
-        public static final int bt_activation=0x7f0b000f;
-        public static final int bt_back=0x7f0b002a;
-        public static final int bt_change=0x7f0b0016;
-        public static final int bt_open=0x7f0b0012;
-        public static final int bt_select=0x7f0b0014;
-        public static final int bt_test=0x7f0b0017;
-        public static final int btnSet=0x7f0b002b;
-        public static final int btn_connect=0x7f0b0007;
-        public static final int btn_discover=0x7f0b0008;
-        public static final int button_clear=0x7f0b0006;
-        public static final int button_scan=0x7f0b0025;
-        public static final int button_send=0x7f0b0005;
-        public static final int candidate_flipper=0x7f0b001b;
-        public static final int candidate_view1=0x7f0b001c;
-        public static final int candidate_view2=0x7f0b001d;
-        public static final int candidates_container=0x7f0b0018;
-        public static final int composing_view=0x7f0b0027;
-        public static final int edit_text_out=0x7f0b0004;
-        public static final int edt_test=0x7f0b001e;
-        public static final int floating_container=0x7f0b0026;
-        public static final int im_bar_code=0x7f0b0020;
-        public static final int imageView1=0x7f0b000c;
-        public static final int in=0x7f0b0003;
-        public static final int l1=0x7f0b000d;
-        public static final int lc=0x7f0b0010;
-        public static final int linearLayout1=0x7f0b000b;
-        public static final int linearLayout2=0x7f0b000a;
-        public static final int lv_config=0x7f0b0000;
-        public static final int myv_iamge=0x7f0b0009;
-        public static final int new_devices=0x7f0b0024;
-        public static final int paired_devices=0x7f0b0022;
-        public static final int spinner1=0x7f0b0015;
-        public static final int title_left_text=0x7f0b0001;
-        public static final int title_new_devices=0x7f0b0023;
-        public static final int title_paired_devices=0x7f0b0021;
-        public static final int title_right_text=0x7f0b0002;
-        public static final int tvTitle=0x7f0b0029;
-        public static final int tv_connect_status=0x7f0b0013;
-        public static final int tv_info=0x7f0b001f;
+        public static final int EditTextAddContant=0x7f0c000e;
+        public static final int EditTextAddContant1=0x7f0c0011;
+        public static final int LayoutTitle=0x7f0c0028;
+        public static final int alpha_floatable=0x7f0c002c;
+        public static final int alpha_view1=0x7f0c002d;
+        public static final int alpha_view2=0x7f0c002e;
+        public static final int arrow_left_btn=0x7f0c0019;
+        public static final int arrow_right_btn=0x7f0c001a;
+        public static final int bt_activation=0x7f0c000f;
+        public static final int bt_back=0x7f0c002a;
+        public static final int bt_change=0x7f0c0016;
+        public static final int bt_open=0x7f0c0012;
+        public static final int bt_select=0x7f0c0014;
+        public static final int bt_test=0x7f0c0017;
+        public static final int btnSet=0x7f0c002b;
+        public static final int btn_connect=0x7f0c0007;
+        public static final int btn_discover=0x7f0c0008;
+        public static final int button_clear=0x7f0c0006;
+        public static final int button_scan=0x7f0c0025;
+        public static final int button_send=0x7f0c0005;
+        public static final int candidate_flipper=0x7f0c001b;
+        public static final int candidate_view1=0x7f0c001c;
+        public static final int candidate_view2=0x7f0c001d;
+        public static final int candidates_container=0x7f0c0018;
+        public static final int composing_view=0x7f0c0027;
+        public static final int edit_text_out=0x7f0c0004;
+        public static final int edt_test=0x7f0c001e;
+        public static final int floating_container=0x7f0c0026;
+        public static final int im_bar_code=0x7f0c0020;
+        public static final int imageView1=0x7f0c000c;
+        public static final int in=0x7f0c0003;
+        public static final int l1=0x7f0c000d;
+        public static final int lc=0x7f0c0010;
+        public static final int linearLayout1=0x7f0c000b;
+        public static final int linearLayout2=0x7f0c000a;
+        public static final int lv_config=0x7f0c0000;
+        public static final int myv_iamge=0x7f0c0009;
+        public static final int new_devices=0x7f0c0024;
+        public static final int paired_devices=0x7f0c0022;
+        public static final int spinner1=0x7f0c0015;
+        public static final int title_left_text=0x7f0c0001;
+        public static final int title_new_devices=0x7f0c0023;
+        public static final int title_paired_devices=0x7f0c0021;
+        public static final int title_right_text=0x7f0c0002;
+        public static final int tvTitle=0x7f0c0029;
+        public static final int tv_connect_status=0x7f0c0013;
+        public static final int tv_info=0x7f0c001f;
     }
     public static final class layout {
         public static final int activity_config=0x7f030000;
@@ -227,95 +231,95 @@ public final class R {
         public static final int dict_pinyin=0x7f050000;
     }
     public static final class string {
-        public static final int BeginTest=0x7f09004e;
-        public static final int Change=0x7f09004a;
-        public static final int Choose=0x7f090043;
-        public static final int Devices=0x7f090035;
-        public static final int Function=0x7f090039;
-        public static final int FunctionScanner=0x7f090052;
-        public static final int Open=0x7f090046;
-        public static final int PleaseChooseInputMothed=0x7f090044;
-        public static final int QuickConfigBarcode=0x7f09004f;
-        public static final int ReadScanner=0x7f090051;
-        public static final int SelectBlueDevice=0x7f090048;
-        public static final int SetFirstStep=0x7f090042;
-        public static final int SetForthStep=0x7f090049;
-        public static final int SetLastStep=0x7f09004b;
-        public static final int SetSecondStep=0x7f090045;
-        public static final int SetThirdStep=0x7f090047;
-        public static final int SetTitle=0x7f090041;
-        public static final int SettingScanner=0x7f090050;
-        public static final int StartBluetooth=0x7f090037;
-        public static final int StartScan=0x7f090036;
-        public static final int StopBluetooth=0x7f090038;
-        public static final int Test=0x7f09004c;
-        public static final int app_name=0x7f090000;
-        public static final int bt_not_enabled_leaving=0x7f090028;
-        public static final int button_scan=0x7f090032;
-        public static final int clear=0x7f090026;
-        public static final int connect=0x7f090033;
-        public static final int devoice_connected_to=0x7f09002a;
-        public static final int devoice_connecting=0x7f090029;
-        public static final int devoice_not_connected=0x7f09002b;
-        public static final int discoverable=0x7f090034;
-        public static final int gs_about=0x7f09003a;
-        public static final int ime_connect_activity_test=0x7f090003;
-        public static final int ime_name=0x7f090001;
-        public static final int ime_settings_activity_name=0x7f090002;
-        public static final int key_cn_symbol=0x7f09003b;
-        public static final int key_cn_usb=0x7f09003c;
-        public static final int none_found_device=0x7f09002f;
-        public static final int none_paired=0x7f09002e;
-        public static final int not_connected=0x7f090027;
-        public static final int scanning=0x7f09002c;
-        public static final int select_bluetoothIME=0x7f09004d;
-        public static final int select_device=0x7f09002d;
-        public static final int send=0x7f090025;
-        public static final int setting=0x7f09001b;
-        public static final int setting_advanced_key=0x7f09001a;
-        public static final int setting_disabled=0x7f090022;
-        public static final int setting_enabled=0x7f090021;
-        public static final int setting_others=0x7f090023;
-        public static final int setting_others_summary=0x7f090024;
-        public static final int setting_prediction_key=0x7f090018;
-        public static final int setting_prediction_title=0x7f09001e;
+        public static final int BeginTest=0x7f0a004e;
+        public static final int Change=0x7f0a004a;
+        public static final int Choose=0x7f0a0043;
+        public static final int Devices=0x7f0a0035;
+        public static final int Function=0x7f0a0039;
+        public static final int FunctionScanner=0x7f0a0052;
+        public static final int Open=0x7f0a0046;
+        public static final int PleaseChooseInputMothed=0x7f0a0044;
+        public static final int QuickConfigBarcode=0x7f0a004f;
+        public static final int ReadScanner=0x7f0a0051;
+        public static final int SelectBlueDevice=0x7f0a0048;
+        public static final int SetFirstStep=0x7f0a0042;
+        public static final int SetForthStep=0x7f0a0049;
+        public static final int SetLastStep=0x7f0a004b;
+        public static final int SetSecondStep=0x7f0a0045;
+        public static final int SetThirdStep=0x7f0a0047;
+        public static final int SetTitle=0x7f0a0041;
+        public static final int SettingScanner=0x7f0a0050;
+        public static final int StartBluetooth=0x7f0a0037;
+        public static final int StartScan=0x7f0a0036;
+        public static final int StopBluetooth=0x7f0a0038;
+        public static final int Test=0x7f0a004c;
+        public static final int app_name=0x7f0a0000;
+        public static final int bt_not_enabled_leaving=0x7f0a0028;
+        public static final int button_scan=0x7f0a0032;
+        public static final int clear=0x7f0a0026;
+        public static final int connect=0x7f0a0033;
+        public static final int devoice_connected_to=0x7f0a002a;
+        public static final int devoice_connecting=0x7f0a0029;
+        public static final int devoice_not_connected=0x7f0a002b;
+        public static final int discoverable=0x7f0a0034;
+        public static final int gs_about=0x7f0a003a;
+        public static final int ime_connect_activity_test=0x7f0a0003;
+        public static final int ime_name=0x7f0a0001;
+        public static final int ime_settings_activity_name=0x7f0a0002;
+        public static final int key_cn_symbol=0x7f0a003b;
+        public static final int key_cn_usb=0x7f0a003c;
+        public static final int none_found_device=0x7f0a002f;
+        public static final int none_paired=0x7f0a002e;
+        public static final int not_connected=0x7f0a0027;
+        public static final int scanning=0x7f0a002c;
+        public static final int select_bluetoothIME=0x7f0a004d;
+        public static final int select_device=0x7f0a002d;
+        public static final int send=0x7f0a0025;
+        public static final int setting=0x7f0a001b;
+        public static final int setting_advanced_key=0x7f0a001a;
+        public static final int setting_disabled=0x7f0a0022;
+        public static final int setting_enabled=0x7f0a0021;
+        public static final int setting_others=0x7f0a0023;
+        public static final int setting_others_summary=0x7f0a0024;
+        public static final int setting_prediction_key=0x7f0a0018;
+        public static final int setting_prediction_title=0x7f0a001e;
         /**  settings related 
          */
-        public static final int setting_sound_key=0x7f090016;
-        public static final int setting_sound_key_title=0x7f09001c;
-        public static final int setting_switch_key=0x7f090019;
-        public static final int setting_switch_shift_space_title=0x7f090020;
-        public static final int setting_switch_title=0x7f09001f;
-        public static final int setting_vibrate_key=0x7f090017;
-        public static final int setting_vibrate_title=0x7f09001d;
-        public static final int title_other_devices=0x7f090031;
-        public static final int title_paired_devices=0x7f090030;
+        public static final int setting_sound_key=0x7f0a0016;
+        public static final int setting_sound_key_title=0x7f0a001c;
+        public static final int setting_switch_key=0x7f0a0019;
+        public static final int setting_switch_shift_space_title=0x7f0a0020;
+        public static final int setting_switch_title=0x7f0a001f;
+        public static final int setting_vibrate_key=0x7f0a0017;
+        public static final int setting_vibrate_title=0x7f0a001d;
+        public static final int title_other_devices=0x7f0a0031;
+        public static final int title_paired_devices=0x7f0a0030;
         /**  Used by the toggle keys in soft keyboards. 
          */
-        public static final int toggle_cn=0x7f090005;
-        public static final int toggle_cn_cand=0x7f090006;
-        public static final int toggle_en_lower=0x7f090007;
-        public static final int toggle_en_sym1=0x7f090009;
-        public static final int toggle_en_sym2=0x7f09000a;
-        public static final int toggle_en_upper=0x7f090008;
-        public static final int toggle_enter_done=0x7f090010;
-        public static final int toggle_enter_go=0x7f09000c;
-        public static final int toggle_enter_next=0x7f09000f;
-        public static final int toggle_enter_search=0x7f09000d;
-        public static final int toggle_enter_send=0x7f09000e;
-        public static final int toggle_phone_sym=0x7f090015;
-        public static final int toggle_row_cn=0x7f090011;
-        public static final int toggle_row_emailaddress=0x7f090014;
-        public static final int toggle_row_en=0x7f090012;
-        public static final int toggle_row_uri=0x7f090013;
-        public static final int toggle_smiley=0x7f09000b;
-        public static final int ui_title_back=0x7f09003d;
-        public static final int ui_title_complete=0x7f09003e;
-        public static final int ui_title_settings=0x7f09003f;
-        public static final int ui_title_title=0x7f090040;
+        public static final int toggle_cn=0x7f0a0005;
+        public static final int toggle_cn_cand=0x7f0a0006;
+        public static final int toggle_en_lower=0x7f0a0007;
+        public static final int toggle_en_sym1=0x7f0a0009;
+        public static final int toggle_en_sym2=0x7f0a000a;
+        public static final int toggle_en_upper=0x7f0a0008;
+        public static final int toggle_enter_done=0x7f0a0010;
+        public static final int toggle_enter_go=0x7f0a000c;
+        public static final int toggle_enter_next=0x7f0a000f;
+        public static final int toggle_enter_search=0x7f0a000d;
+        public static final int toggle_enter_send=0x7f0a000e;
+        public static final int toggle_phone_sym=0x7f0a0015;
+        public static final int toggle_row_cn=0x7f0a0011;
+        public static final int toggle_row_emailaddress=0x7f0a0014;
+        public static final int toggle_row_en=0x7f0a0012;
+        public static final int toggle_row_uri=0x7f0a0013;
+        public static final int toggle_smiley=0x7f0a000b;
+        public static final int ui_title_back=0x7f0a003d;
+        public static final int ui_title_complete=0x7f0a003e;
+        public static final int ui_title_settings=0x7f0a003f;
+        public static final int ui_title_title=0x7f0a0040;
         /**  version = apk(java) + ime engine + sys dict + [hotlist (TBD)] 
          */
-        public static final int version=0x7f090004;
+        public static final int version=0x7f0a0004;
     }
     public static final class style {
         /** 
@@ -339,18 +343,18 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f0a0000;
+        public static final int AppBaseTheme=0x7f0b0000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f0a0001;
-        public static final int button_title_left=0x7f0a0003;
-        public static final int button_title_right=0x7f0a0004;
-        public static final int button_yellow=0x7f0a0008;
-        public static final int text_14_ffffff_6=0x7f0a0005;
-        public static final int text_content_first=0x7f0a0007;
-        public static final int text_second_second_first=0x7f0a0006;
-        public static final int title_background=0x7f0a0002;
+        public static final int AppTheme=0x7f0b0001;
+        public static final int button_title_left=0x7f0b0003;
+        public static final int button_title_right=0x7f0b0004;
+        public static final int button_yellow=0x7f0b0008;
+        public static final int text_14_ffffff_6=0x7f0b0005;
+        public static final int text_content_first=0x7f0b0007;
+        public static final int text_second_second_first=0x7f0b0006;
+        public static final int title_background=0x7f0b0002;
     }
     public static final class xml {
         public static final int method=0x7f040000;

@@ -258,7 +258,7 @@ public class PinyinIME extends InputMethodService {
 	 * @param text
 	 */
 	public void SetText(CharSequence text) {
-		Log.e("lichao", "SetText->text=" + text);
+		Log.e("lichao", "PinyinIME->SetText->text=" + text);
 		InputConnection ic = getCurrentInputConnection();
 		if (ic == null)
 			return;
@@ -1583,12 +1583,9 @@ public class PinyinIME extends InputMethodService {
 	 * 发送命令配置扫描器
 	 */
 	public void showFunctionList() {
-		final String[] items = {"设置前缀", "设置后缀", "蓝牙HID模式", "蓝牙SPP模式", "蓝牙BLE模式",
-				"休眠1分钟", "休眠5分钟", "休眠10分钟", "休眠30分钟", "从不休眠", "立即休眠",
-				"震动打开", "震动关闭", "静音", "低音量", "中音量", "高音量", "结尾添加换行", "结尾不添加"};
 		AlertDialog.Builder builder = new AlertDialog.Builder(this, 19);
 		builder.setTitle(R.string.SettingScanner);
-		builder.setItems(items, new DialogInterface.OnClickListener() {
+		builder.setItems(R.array.idata_commands, new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -1673,11 +1670,10 @@ public class PinyinIME extends InputMethodService {
 	 * 功能选项对话框
 	 */
 	public void showFunctionMenu() {
-		final String[] items = {"条码配置", "发送命令配置扫描器", "读取扫描器信息", "扫描器功能"};
 		AlertDialog.Builder builder = new AlertDialog.Builder(this, 4);
 		builder.setIcon(R.drawable.app_icon);
 		builder.setTitle(R.string.Function);
-		builder.setSingleChoiceItems(items, -1, new OnClickListener() {
+		builder.setSingleChoiceItems(R.array.idata_config, -1, new OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

@@ -193,7 +193,6 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 	public String getInputMethod() {
 		String ss = Settings.Secure.getString(IDataSettingActivity.this.getContentResolver(),
                 Settings.Secure.DEFAULT_INPUT_METHOD);
-		Log.e("lichao", " ‰»Î∑®:" + ss);
 		return ss;
 	}
 	

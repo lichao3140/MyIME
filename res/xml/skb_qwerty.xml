@@ -27,14 +27,14 @@
     </row>
     <row width="10.205%p" >
         <key
-            icon="@drawable/idata_icon"
-            icon_popup="@drawable/idata_popup_icon"
+            icon="@drawable/smiley_icon"
+            icon_popup="@drawable/smiley_popup_icon"
             code="-6"
             width="14.286%p" >
             <toggle_state
                 code="-6"
-                icon="@drawable/idata_icon"
-                icon_popup="@drawable/idata_popup_icon"
+                icon="@drawable/smiley_icon"
+                icon_popup="@drawable/smiley_popup_icon"
                 key_type="2"
                 state_id="@string/toggle_smiley" />
             <toggle_state

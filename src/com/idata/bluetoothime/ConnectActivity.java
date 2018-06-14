@@ -104,8 +104,7 @@ public class ConnectActivity extends Activity implements OnClickListener {
 	 * 聊天需要的一些设置
 	 */
 	private void setupChat() {
-		mConversationArrayAdapter = new ArrayAdapter<String>(this,
-				R.layout.message);
+		mConversationArrayAdapter = new ArrayAdapter<String>(this, R.layout.message);
 		mConversationView = (ListView) findViewById(R.id.in);
 		mConversationView.setAdapter(mConversationArrayAdapter);
 		mSendButton = (Button) findViewById(R.id.button_send);
@@ -134,9 +133,9 @@ public class ConnectActivity extends Activity implements OnClickListener {
 	 * @param message
 	 *            发送的内容
 	 */
-	public static void sendMessage(String message) {
+	public void sendMessage(String message) {
 		if (mChatService.getState() != BluetoothService.STATE_CONNECTED) {
-			//Toast.makeText(this, R.string.not_connected, Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, R.string.not_connected, Toast.LENGTH_SHORT).show();
 			return;
 		}
 		if (message.length() > 0) {
@@ -275,8 +274,8 @@ public class ConnectActivity extends Activity implements OnClickListener {
 	public void onDestroy() {
 		super.onDestroy();
 		// 停止蓝牙
-//		if (mChatService != null)
-//			mChatService.stop();
+		if (mChatService != null)
+			mChatService.stop();
 		Log.e(TAG, "ConnectActivity----onDestroy()");
 	}
 
