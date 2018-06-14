@@ -75,10 +75,10 @@
     <string name="ui_title_complete">完成</string>
     <string name="ui_title_settings">设置</string>
     <string name="ui_title_title">标题</string>
-    <string name="SetTitle">如何使用iData输入法</string>
-    <string name="SetFirstStep">第一步：激活iData输入法</string>
+    <string name="SetTitle">如何使用蓝牙输入法</string>
+    <string name="SetFirstStep">第一步：激活蓝牙输入法</string>
     <string name="Choose">勾选</string>
-    <string name="PleaseChooseInputMothed">请勾选iData输入法</string>
+    <string name="PleaseChooseInputMothed">请勾选蓝牙输入法</string>
     <string name="SetSecondStep">第二步：开启蓝牙，并配对设备，配对码为1234</string>
     <string name="Open">开启</string>
     <string name="SetThirdStep">第三步：自动搜索蓝牙设备，并通过蓝牙设备列表，选择所要连接的设备</string>

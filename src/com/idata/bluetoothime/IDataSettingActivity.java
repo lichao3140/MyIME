@@ -1,6 +1,7 @@
 package com.idata.bluetoothime;
 
 import android.app.Activity;
+import android.provider.Settings;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 public class IDataSettingActivity extends Activity implements OnClickListener {
 	static final String TAG = IDataSettingActivity.class.getSimpleName();
 	
+	private static final String INPUT_MOTHOD = "com.idata.bluetoothime/.PinyinIME";
 	private TextView tv_Title, tv_ConnectStatus;
 	private Button bt_Activation, bt_Open, bt_Select, bt_Change, bt_Test, bt_Back;
 	// 系统键盘设置
@@ -79,6 +81,11 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 		bt_Change.setOnClickListener(this);
 		bt_Test.setOnClickListener(this);
 		bt_Back.setOnClickListener(this);
+		
+		String im = getInputMethod();
+		if (!im.equals(INPUT_MOTHOD)) {
+			ToolsUtil.showToast("当前输入法不是蓝牙输入法");
+		}
 	}
 	
 	@Override
@@ -183,6 +190,18 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 		}
 	}
 	
+	public String getInputMethod() {
+		String ss = Settings.Secure.getString(IDataSettingActivity.this.getContentResolver(),
+                Settings.Secure.DEFAULT_INPUT_METHOD);
+		Log.e("lichao", "输入法:" + ss);
+		return ss;
+	}
+	
+	public void setInputMethod() {
+		Settings.Secure.putString(IDataSettingActivity.this.getContentResolver(),
+               Settings.Secure.DEFAULT_INPUT_METHOD,"com.idata.bluetoothime/.PinyinIME"); 
+	}
+	
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
@@ -194,7 +213,7 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 	@Override
 	protected synchronized void onResume() {
 		super.onResume();
-		Log.e(TAG, "----onResume()");
+		Log.e(TAG, "IDataSettingActivity----onResume()");
 		if (mChatService != null) {
 			if (mChatService.getState() == BluetoothService.STATE_NONE) {
 				mChatService.startChat();
@@ -248,24 +267,28 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 	@Override
 	protected synchronized void onRestart() {
 		super.onRestart();
-		Log.e(TAG, "----onRestart()");
+		Log.e(TAG, "IDataSettingActivity----onRestart()");
+		String im = getInputMethod();
+		if (!im.equals(INPUT_MOTHOD)) {
+			ToolsUtil.showToast("当前输入法不是蓝牙输入法");
+		}
 	}
 	
 	@Override
 	protected synchronized void onPause() {
 		super.onPause();
-		Log.e(TAG, "----onPause()");
+		Log.e(TAG, "IDataSettingActivity----onPause()");
 	}
 	
 	@Override
 	protected void onStop() {
 		super.onStop();
-		Log.e(TAG, "----onStop()");
+		Log.e(TAG, "IDataSettingActivity----onStop()");
 	}
 	
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		Log.e(TAG, "----onDestroy()");
+		Log.e(TAG, "IDataSettingActivity----onDestroy()");
 	}
 }

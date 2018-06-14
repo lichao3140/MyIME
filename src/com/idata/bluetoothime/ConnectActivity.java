@@ -10,7 +10,6 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -91,7 +90,7 @@ public class ConnectActivity extends Activity implements OnClickListener {
 	@Override
 	public synchronized void onResume() {
 		super.onResume();
-		Log.e(TAG, "----onResume()");
+		Log.e(TAG, "ConnectActivity----onResume()");
 		if (mChatService != null) {
 			if (mChatService.getState() == BluetoothService.STATE_NONE) {
 				mChatService.startChat();
@@ -117,7 +116,6 @@ public class ConnectActivity extends Activity implements OnClickListener {
 				String message = edt.getText().toString();
 				sendMessage(message);
 				edt.setText("");
-				//sendMessage(BluetoothConstant.BLUETOOTH_END_NONE);
 			}
 		});
 		mClearButton.setOnClickListener(new OnClickListener() {
@@ -251,7 +249,7 @@ public class ConnectActivity extends Activity implements OnClickListener {
 	 * ÔÊÐíÉè±¸±»ËÑË÷
 	 */
 	private void ensureDiscoverable() {
-		Log.e(TAG, "----ÔÊÐí±»ËÑË÷");
+		Log.e(TAG, "ConnectActivity----ÔÊÐí±»ËÑË÷");
 		if (mBluetoothAdapter.getScanMode() != BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
 			Intent discoverableIntent = new Intent(
 					BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
@@ -264,13 +262,13 @@ public class ConnectActivity extends Activity implements OnClickListener {
 	@Override
 	public synchronized void onPause() {
 		super.onPause();
-		Log.e(TAG, "----onPause()");
+		Log.e(TAG, "ConnectActivity----onPause()");
 	}
 
 	@Override
 	public void onStop() {
 		super.onStop();
-		Log.e(TAG, "----onStop()");
+		Log.e(TAG, "ConnectActivity----onStop()");
 	}
 
 	@Override
@@ -279,7 +277,7 @@ public class ConnectActivity extends Activity implements OnClickListener {
 		// Í£Ö¹À¶ÑÀ
 //		if (mChatService != null)
 //			mChatService.stop();
-		Log.e(TAG, "----onDestroy()");
+		Log.e(TAG, "ConnectActivity----onDestroy()");
 	}
 
 }

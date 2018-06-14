@@ -258,6 +258,7 @@ public class PinyinIME extends InputMethodService {
 	 * @param text
 	 */
 	public void SetText(CharSequence text) {
+		Log.e("lichao", "SetText->text=" + text);
 		InputConnection ic = getCurrentInputConnection();
 		if (ic == null)
 			return;
@@ -266,6 +267,17 @@ public class PinyinIME extends InputMethodService {
 		ic.commitText(text, 0);
 		ic.endBatchEdit();
 
+	}
+	
+	public String getInputMethod() {
+		String ss = android.provider.Settings.Secure.getString(PinyinIME.this.getContentResolver(),
+                android.provider.Settings.Secure.DEFAULT_INPUT_METHOD);
+		return ss;
+	}
+	
+	public void setInputMethod() {
+		android.provider.Settings.Secure.putString(PinyinIME.this.getContentResolver(),
+               android.provider.Settings.Secure.DEFAULT_INPUT_METHOD, "com.idata.bluetoothime/.PinyinIME"); 
 	}
 
 	/**
@@ -1350,8 +1362,6 @@ public class PinyinIME extends InputMethodService {
 			break;
 		}
 	}
-
-	
 	
 	/**
 	 * 显示候选词视图
@@ -1585,7 +1595,7 @@ public class PinyinIME extends InputMethodService {
 				dialog.dismiss();
 				switch (which) {
 				case 0:
-					Log.e("lichao", "第1个");
+					Log.e("lichao", "第1个---进入蓝牙设置模式");
 					IDataSettingActivity.sendMessage(BluetoothConstant.BLUETOOTH_ENTER_SET_MODE);
 					break;
 				case 1:

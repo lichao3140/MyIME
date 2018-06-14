@@ -23,6 +23,8 @@ public class BluetoothService {
 	private final static String TAG = "BluetoothService";
 	// 测试数据
 	private static final String NAME = "BluetoothChat";
+	// 自己的输入法
+	private static final String INPUT_MOTHOD = "com.idata.bluetoothime/.PinyinIME";
 
 	// 声明一个唯一的UUID
 	private static final UUID MY_UUID = UUID
@@ -180,7 +182,6 @@ public class BluetoothService {
                     unpairDevice(device);  
             }  
         }  
-  
     }  
   
     //反射来调用BluetoothDevice.removeBond取消设备的配对  
@@ -343,11 +344,10 @@ public class BluetoothService {
 				startChat();
 				return;
 			}
-
+			
 			synchronized (BluetoothService.this) {
 				mConnectThread = null;
 			}
-
 			connected(mmSocket, mmDevice);
 		}
 
@@ -392,13 +392,18 @@ public class BluetoothService {
 					bytes = mmInStream.read(buffer);
 					String readStr = new String(buffer, 0, bytes);// 字节数组直接转换成字符串
 					String str = bytes2HexString(buffer).replaceAll("00", "").trim();
+					String im = android.provider.Settings.Secure.getString(ApplicationContext.getInstance().getContentResolver(),
+			                android.provider.Settings.Secure.DEFAULT_INPUT_METHOD);
+					
 					Log.e("lichao", "BluetoothChatService->readStr=" + readStr);
 					Log.e("lichao", "BluetoothChatService->str=" + str);
 					if (bytes > 0) {// 将读取到的消息发到主线程
 						mHandler.obtainMessage(
 								ConnectActivity.MESSAGE_READ, bytes, -1,
 								buffer).sendToTarget();
-						ss.pinyinIME.SetText(readStr);
+						if (im.equals(INPUT_MOTHOD)) {
+							ss.pinyinIME.SetText(readStr);
+						}
 					} else {
 						Log.e(TAG, "disconnected");
 						connectionLost();
@@ -429,7 +434,6 @@ public class BluetoothService {
 		 *            要写的字节
 		 */
 		public void write(byte[] buffer) {
-			int bytes;
 			try {
 				mmOutStream.write(buffer);
 				
