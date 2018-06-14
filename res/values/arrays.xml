@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="idata_commands">
+        <item>设置前缀</item>
+        <item>设置后缀</item>
+        <item>蓝牙HID模式</item>
+        <item>蓝牙SPP模式</item>
+        <item>蓝牙BLE模式</item>
+        <item>休眠1分钟</item>
+        <item>休眠5分钟</item>
+        <item>休眠10分钟</item>
+        <item>休眠30分钟</item>
+        <item>从不休眠</item>
+        <item>立即休眠</item>
+        <item>震动打开</item>
+        <item>震动关闭</item>
+        <item>静音</item>
+        <item>低音量</item>
+        <item>中音量</item>
+        <item>高音量</item>
+        <item>结尾添加换行</item>
+        <item>结尾不添加</item>
+    </string-array>
+  
+    <string-array name="idata_config">
+        <item>条码配置</item>
+        <item>发送命令配置扫描器</item>
+        <item>读取扫描器信息</item>
+        <item>扫描器功能</item>
+    </string-array>
+</resources>
