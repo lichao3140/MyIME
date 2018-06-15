@@ -28,9 +28,8 @@ public class BluetoothService {
 	// 自己的输入法
 	private static final String INPUT_MOTHOD = "com.idata.bluetoothime/.PinyinIME";
 
-	// 声明一个唯一的UUID
-	private static final UUID MY_UUID = UUID
-			.fromString("00001101-0000-1000-8000-00805F9B34FB");
+	// 将蓝牙模拟成串口的服务，声明一个唯一的UUID
+	private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
 	private static BluetoothAdapter mAdapter;
 	private final Handler mHandler;
@@ -46,7 +45,7 @@ public class BluetoothService {
 	public static final int STATE_LISTEN = 1;
 	public static final int STATE_CONNECTING = 2;
 	public static final int STATE_CONNECTED = 3;
-
+	
 	public BluetoothService(Context context, Handler handler) {
 		mAdapter = BluetoothAdapter.getDefaultAdapter();
 		mState = STATE_NONE;
@@ -122,11 +121,13 @@ public class BluetoothService {
 	public synchronized void connected(BluetoothSocket socket, BluetoothDevice device) {
 		Log.e(TAG, "确认蓝牙配对 ");
 
+		// Cancel any thread attempting to make a connection
 		if (mConnectThread != null) {
 			mConnectThread.cancel();
 			mConnectThread = null;
 		}
 
+		// Cancel any thread currently running a connection
 		if (mConnectedThread != null) {
 			mConnectedThread.cancel();
 			mConnectedThread = null;
@@ -137,6 +138,7 @@ public class BluetoothService {
 			mAcceptThread = null;
 		}
 
+		// Start the thread to connect with the given device
 		mConnectedThread = new ConnectedThread(socket);
 		mConnectedThread.start();
 		// 连接成功，通知activity
@@ -192,7 +194,7 @@ public class BluetoothService {
             Method m = device.getClass().getMethod("removeBond", (Class[]) null);  
             m.invoke(device, (Object[]) null);  
         } catch (Exception e) {  
-            Log.e(TAG, e.getMessage());  
+            Log.e(TAG, "unpairDevice" + e.getMessage());  
         }  
     }  
 	
@@ -253,7 +255,6 @@ public class BluetoothService {
 
 		public AcceptThread() {
 			BluetoothServerSocket tmp = null;
-
 			try {
 				tmp = mAdapter.listenUsingRfcommWithServiceRecord(NAME, MY_UUID);
 			} catch (IOException e) {
@@ -319,7 +320,6 @@ public class BluetoothService {
 		public ConnectThread(BluetoothDevice device) {
 			mmDevice = device;
 			BluetoothSocket tmp = null;
-
 			try {
 				tmp = device.createRfcommSocketToServiceRecord(MY_UUID);
 			} catch (IOException e) {
@@ -342,6 +342,7 @@ public class BluetoothService {
 				} catch (IOException e2) {
 					Log.e(TAG, "关闭连接失败" + e2);
 				}
+				Log.e(TAG, "关闭连接==" + e);
 				// 开启聊天接收线程
 				startChat();
 				return;
@@ -431,9 +432,7 @@ public class BluetoothService {
 
 		/**
 		 * 写入OutStream连接
-		 * 
-		 * @param buffer
-		 *            要写的字节
+		 * @param buffer 要写的字节
 		 */
 		public void write(byte[] buffer) {
 			try {

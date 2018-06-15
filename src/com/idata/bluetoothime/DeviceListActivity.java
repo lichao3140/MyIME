@@ -76,8 +76,7 @@ public class DeviceListActivity extends Activity {
 						+ device.getAddress());
 			}
 		} else {
-			String noDevices = getResources().getText(R.string.none_paired)
-					.toString();
+			String noDevices = getResources().getText(R.string.none_paired).toString();
 			mPairedDevicesAdapter.add(noDevices);
 		}
 	}
@@ -104,6 +103,7 @@ public class DeviceListActivity extends Activity {
 		}
 		mBtAdapter.startDiscovery();
 	}
+	
 	/**
 	 * 监听搜索到的设备
 	 */
@@ -126,8 +126,7 @@ public class DeviceListActivity extends Activity {
 					
 					}
 				}
-			} else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED
-					.equals(action)) {
+			} else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
 				Log.e(TAG, "----ACTION_DISCOVERY_FINISHED----");
 				setProgressBarIndeterminateVisibility(false);
 				setTitle(R.string.select_device);

@@ -1340,7 +1340,7 @@ public class PinyinIME extends InputMethodService {
 		Intent intent = new Intent();
 		switch (keyCode) {
 		case IDATA_KEY_DEVICE:
-			intent.setClass(PinyinIME.this, DeviceListActivity.class);
+			intent.setClass(PinyinIME.this, DevicesActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(intent);
 			break;

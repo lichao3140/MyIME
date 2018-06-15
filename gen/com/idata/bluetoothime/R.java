@@ -222,10 +222,11 @@ public final class R {
         public static final int config_item=0x7f030006;
         public static final int device_list=0x7f030007;
         public static final int device_name=0x7f030008;
-        public static final int floating_container=0x7f030009;
-        public static final int gs_ui_title=0x7f03000a;
-        public static final int message=0x7f03000b;
-        public static final int skb_container=0x7f03000c;
+        public static final int devices=0x7f030009;
+        public static final int floating_container=0x7f03000a;
+        public static final int gs_ui_title=0x7f03000b;
+        public static final int message=0x7f03000c;
+        public static final int skb_container=0x7f03000d;
     }
     public static final class raw {
         public static final int dict_pinyin=0x7f050000;
