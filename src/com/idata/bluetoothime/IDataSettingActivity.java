@@ -1,10 +1,15 @@
 package com.idata.bluetoothime;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.provider.Settings;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -18,10 +23,11 @@ import android.widget.Toast;
 
 public class IDataSettingActivity extends Activity implements OnClickListener {
 	static final String TAG = IDataSettingActivity.class.getSimpleName();
-	
+
 	private static final String INPUT_MOTHOD = "com.idata.bluetoothime/.PinyinIME";
 	private TextView tv_Title, tv_ConnectStatus;
-	private Button bt_Activation, bt_Open, bt_Select, bt_Change, bt_Test, bt_Back;
+	private Button bt_Activation, bt_Open, bt_Select, bt_Change, bt_Test,
+			bt_Back;
 	// 系统键盘设置
 	private InputMethodManager mImm;
 	private boolean mNeedsToAdjustStepNumberToSystemState;
@@ -31,13 +37,13 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 	private static BluetoothService mChatService = null;
 	// 连接设备的名称
 	private String mConnectedDeviceName = null;
-	//private ArrayAdapter<String> mConversationArrayAdapter;
+	// private ArrayAdapter<String> mConversationArrayAdapter;
 	public static final String DEVICE_NAME = "device_name";
 	public static final String TOAST = "toast";
-	
+
 	private static final int REQUEST_CONNECT_DEVICE = 1;
 	private static final int REQUEST_ENABLE_BT = 2;
-	
+
 	// 从BluetoothChatService发送处理程序的消息类型
 	public static final int MESSAGE_STATE_CHANGE = 1;
 	public static final int MESSAGE_READ = 2;
@@ -45,12 +51,15 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 	public static final int MESSAGE_DEVICE_NAME = 4;
 	public static final int MESSAGE_TOAST = 5;
 
+	private final int LOCATION_PERMISSION_CODE = 2;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		checkBluetoothAndLocationPermission();
 		setContentView(R.layout.activity_setting_idata);
-		
-		mImm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+
+		mImm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 		init();
 		// 获取本地蓝牙适配器
 		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -74,26 +83,27 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 		bt_Test = (Button) findViewById(R.id.bt_test);
 		bt_Back = (Button) findViewById(R.id.bt_back);
 		bt_Back.setText(R.string.ui_title_complete);
-		
+
 		bt_Activation.setOnClickListener(this);
 		bt_Open.setOnClickListener(this);
 		bt_Select.setOnClickListener(this);
 		bt_Change.setOnClickListener(this);
 		bt_Test.setOnClickListener(this);
 		bt_Back.setOnClickListener(this);
-		
+
 		String im = getInputMethod();
 		if (!im.equals(INPUT_MOTHOD)) {
 			ToolsUtil.showToast("当前输入法不是蓝牙输入法");
 		}
 	}
-	
+
 	@Override
 	protected void onStart() {
 		super.onStart();
 		// 判断蓝牙是否打开，，没打开则弹出蓝牙提示打开蓝牙对话框
 		if (!mBluetoothAdapter.isEnabled()) {
-			Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+			Intent enableIntent = new Intent(
+					BluetoothAdapter.ACTION_REQUEST_ENABLE);
 			startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
 		} else {
 			if (mChatService == null) {
@@ -103,7 +113,7 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 			}
 		}
 	}
-	
+
 	/**
 	 * Handler处理BluetoothChatService传来的消息
 	 */
@@ -117,7 +127,7 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 				case BluetoothService.STATE_CONNECTED:
 					tv_ConnectStatus.setText(R.string.StartBluetooth);
 					tv_ConnectStatus.append(mConnectedDeviceName);
-					//mConversationArrayAdapter.clear();
+					// mConversationArrayAdapter.clear();
 					break;
 				case BluetoothService.STATE_CONNECTING:
 					tv_ConnectStatus.setText(R.string.devoice_connecting);
@@ -131,13 +141,14 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 			case MESSAGE_WRITE:
 				byte[] writeBuf = (byte[]) msg.obj;
 				String writeMessage = new String(writeBuf);
-				//mConversationArrayAdapter.add("Me:  " + writeMessage);
+				// mConversationArrayAdapter.add("Me:  " + writeMessage);
 				break;
 			case MESSAGE_READ:
 				byte[] readBuf = (byte[]) msg.obj;
 				// 读取到的数据
 				String readMessage = new String(readBuf, 0, msg.arg1);
-				//mConversationArrayAdapter.add(mConnectedDeviceName + ":  " + readMessage);
+				// mConversationArrayAdapter.add(mConnectedDeviceName + ":  " +
+				// readMessage);
 				Log.e("lichao", "收到消息" + readMessage);
 				break;
 			case MESSAGE_DEVICE_NAME:
@@ -160,16 +171,20 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.bt_activation:
-			Toast.makeText(IDataSettingActivity.this, R.string.select_bluetoothIME, Toast.LENGTH_LONG).show();
-			Intent input = new Intent(android.provider.Settings.ACTION_INPUT_METHOD_SETTINGS);	
+			Toast.makeText(IDataSettingActivity.this,
+					R.string.select_bluetoothIME, Toast.LENGTH_LONG).show();
+			Intent input = new Intent(
+					android.provider.Settings.ACTION_INPUT_METHOD_SETTINGS);
 			startActivity(input);
 			break;
 		case R.id.bt_open:
-			Intent bluetooth = new Intent(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS);
+			Intent bluetooth = new Intent(
+					android.provider.Settings.ACTION_BLUETOOTH_SETTINGS);
 			startActivity(bluetooth);
 			break;
 		case R.id.bt_select:
-			Intent select = new Intent(IDataSettingActivity.this, DeviceListActivity.class);
+			Intent select = new Intent(IDataSettingActivity.this,
+					DeviceListActivity.class);
 			startActivityForResult(select, REQUEST_CONNECT_DEVICE);
 			break;
 		case R.id.bt_change:
@@ -177,7 +192,7 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 			mNeedsToAdjustStepNumberToSystemState = true;
 			break;
 		case R.id.bt_test:
-			Intent test =new Intent();
+			Intent test = new Intent();
 			test.setClass(IDataSettingActivity.this, TestActivity.class);
 			test.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(test);
@@ -189,26 +204,61 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 			break;
 		}
 	}
-	
+
 	public String getInputMethod() {
-		String ss = Settings.Secure.getString(IDataSettingActivity.this.getContentResolver(),
-                Settings.Secure.DEFAULT_INPUT_METHOD);
+		String ss = Settings.Secure.getString(
+				IDataSettingActivity.this.getContentResolver(),
+				Settings.Secure.DEFAULT_INPUT_METHOD);
 		return ss;
 	}
-	
+
 	public void setInputMethod() {
-		Settings.Secure.putString(IDataSettingActivity.this.getContentResolver(),
-               Settings.Secure.DEFAULT_INPUT_METHOD,"com.idata.bluetoothime/.PinyinIME"); 
+		Settings.Secure.putString(
+				IDataSettingActivity.this.getContentResolver(),
+				Settings.Secure.DEFAULT_INPUT_METHOD,
+				"com.idata.bluetoothime/.PinyinIME");
 	}
-	
+
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
 		if (hasFocus && mNeedsToAdjustStepNumberToSystemState) {
-            mNeedsToAdjustStepNumberToSystemState = false;
-        }
+			mNeedsToAdjustStepNumberToSystemState = false;
+		}
 	}
-	
+
+	@SuppressLint("NewApi") 
+	@Override
+	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+		boolean grantedLocation = true;
+
+		if (requestCode == LOCATION_PERMISSION_CODE) {
+			for (int i : grantResults) {
+				if (i != PackageManager.PERMISSION_GRANTED) {
+					grantedLocation = false;
+				}
+			}
+		}
+
+		if (!grantedLocation) {
+			Toast.makeText(this, "Permission error !!!", Toast.LENGTH_SHORT)
+					.show();
+			finish();
+		}
+	}
+
+	@TargetApi(Build.VERSION_CODES.M)
+	private void checkBluetoothAndLocationPermission() {
+		if ((checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+				|| (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
+			requestPermissions(new String[] {
+					Manifest.permission.ACCESS_COARSE_LOCATION,
+					Manifest.permission.ACCESS_FINE_LOCATION },
+					LOCATION_PERMISSION_CODE);
+		}
+	}
+
 	@Override
 	protected synchronized void onResume() {
 		super.onResume();
@@ -219,7 +269,7 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 			}
 		}
 	}
-	
+
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		Log.e(TAG, "onActivityResult " + resultCode);
 		switch (requestCode) {
@@ -227,9 +277,11 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 			// 当DeviceListActivity返回与设备连接的消息
 			if (resultCode == Activity.RESULT_OK) {
 				// 连接设备的MAC地址
-				String address = data.getExtras().getString(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
+				String address = data.getExtras().getString(
+						DeviceListActivity.EXTRA_DEVICE_ADDRESS);
 				// 得到蓝牙对象
-				BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
+				BluetoothDevice device = mBluetoothAdapter
+						.getRemoteDevice(address);
 				// 开始连接设备
 				mChatService.connect(device);
 			}
@@ -241,19 +293,23 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 				mChatService = new BluetoothService(this, mHandler);
 			} else {
 				Log.e(TAG, "蓝牙未启用");
-				Toast.makeText(this, R.string.bt_not_enabled_leaving, Toast.LENGTH_SHORT).show();
+				Toast.makeText(this, R.string.bt_not_enabled_leaving,
+						Toast.LENGTH_SHORT).show();
 				finish();
 			}
 		}
 	}
-	
+
 	/**
 	 * 发送消息
-	 * @param message 消息内容
+	 * 
+	 * @param message
+	 *            消息内容
 	 */
 	public static void sendMessage(String message) {
 		if (mChatService.getState() != BluetoothService.STATE_CONNECTED) {
-			//Toast.makeText(this, R.string.not_connected, Toast.LENGTH_SHORT).show();
+			// Toast.makeText(this, R.string.not_connected,
+			// Toast.LENGTH_SHORT).show();
 			return;
 		}
 		if (message.length() > 0) {
@@ -262,7 +318,7 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 			mChatService.write(send);
 		}
 	}
-	
+
 	@Override
 	protected synchronized void onRestart() {
 		super.onRestart();
@@ -272,19 +328,19 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 			ToolsUtil.showToast("当前输入法不是蓝牙输入法");
 		}
 	}
-	
+
 	@Override
 	protected synchronized void onPause() {
 		super.onPause();
 		Log.e(TAG, "IDataSettingActivity----onPause()");
 	}
-	
+
 	@Override
 	protected void onStop() {
 		super.onStop();
 		Log.e(TAG, "IDataSettingActivity----onStop()");
 	}
-	
+
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
