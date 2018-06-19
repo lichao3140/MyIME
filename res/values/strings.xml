@@ -67,6 +67,7 @@
     <string name="StartScan">开启扫描</string>
     <string name="StartBluetooth">连接蓝牙</string>
     <string name="StopBluetooth">断开连接</string>
+    <string name="SuccessBluetooth">蓝牙连接成功</string>
     <string name="Function">功能</string>
     <string name="gs_about">关于</string>
     <string name="key_cn_symbol">ALT</string>

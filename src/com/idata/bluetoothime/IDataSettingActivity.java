@@ -26,8 +26,7 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 
 	private static final String INPUT_MOTHOD = "com.idata.bluetoothime/.PinyinIME";
 	private TextView tv_Title, tv_ConnectStatus;
-	private Button bt_Activation, bt_Open, bt_Select, bt_Change, bt_Test,
-			bt_Back;
+	private Button bt_Activation, bt_Open, bt_Select, bt_Change, bt_Test, bt_Back;
 	// œµÕ≥º¸≈Ã…Ë÷√
 	private InputMethodManager mImm;
 	private boolean mNeedsToAdjustStepNumberToSystemState;
@@ -242,8 +241,7 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 		}
 
 		if (!grantedLocation) {
-			Toast.makeText(this, "Permission error !!!", Toast.LENGTH_SHORT)
-					.show();
+			Toast.makeText(this, "Permission error !!!", Toast.LENGTH_SHORT).show();
 			finish();
 		}
 	}
@@ -266,6 +264,8 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 		if (mChatService != null) {
 			if (mChatService.getState() == BluetoothService.STATE_NONE) {
 				mChatService.startChat();
+			} else if (mChatService.getState() == BluetoothService.STATE_CONNECTED) {
+				tv_ConnectStatus.setText(R.string.SuccessBluetooth);
 			}
 		}
 	}
@@ -293,8 +293,7 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 				mChatService = new BluetoothService(this, mHandler);
 			} else {
 				Log.e(TAG, "¿∂—¿Œ¥∆Ù”√");
-				Toast.makeText(this, R.string.bt_not_enabled_leaving,
-						Toast.LENGTH_SHORT).show();
+				Toast.makeText(this, R.string.bt_not_enabled_leaving, Toast.LENGTH_SHORT).show();
 				finish();
 			}
 		}
