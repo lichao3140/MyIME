@@ -55,7 +55,9 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		checkBluetoothAndLocationPermission();
+		if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+			checkBluetoothAndLocationPermission();
+		}
 		setContentView(R.layout.activity_setting_idata);
 
 		mImm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
