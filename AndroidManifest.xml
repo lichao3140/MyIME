@@ -102,6 +102,13 @@
             </intent-filter>
         </receiver>
         
+        <receiver android:name="com.idata.bluetoothime.BluetoothReceiver" >
+    		<intent-filter android:priority="1000">
+        		<action android:name="android.bluetooth.device.action.PAIRING_REQUEST"/>
+        		<action android:name="android.bluetooth.device.action.FOUND" />
+    		</intent-filter>
+		</receiver>
+		
     </application>
 
 </manifest>

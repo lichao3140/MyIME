@@ -23,6 +23,7 @@ import android.util.Log;
 @SuppressLint("Instantiatable") 
 public class BluetoothService {
 	private final static String TAG = "BluetoothService";
+	private static final boolean D = true;
 	// 测试数据
 	private static final String NAME = "BluetoothChat";
 	// 自己的输入法
@@ -73,7 +74,8 @@ public class BluetoothService {
 	 * 开始聊天服务
 	 */
 	public void startChat() {
-		Log.e(TAG, "start 聊天");
+		if (D)
+			Log.e(TAG, "start 聊天");
 
 		if (mConnectThread != null) {
 			mConnectThread.cancel();
@@ -97,7 +99,8 @@ public class BluetoothService {
 	 * @param device 连接蓝牙
 	 */
 	public synchronized void connect(BluetoothDevice device) {
-
+		if (D) 
+			Log.d(TAG, "connect to: " + device);
 		if (mState == STATE_CONNECTING) {
 			if (mConnectThread != null) {
 				mConnectThread.cancel();
@@ -154,7 +157,8 @@ public class BluetoothService {
 	 * 停止所有线程
 	 */
 	public synchronized void stop() {
-		Log.e(TAG, "---stop()");
+		if (D)
+			Log.e(TAG, "---stop()");
 		setState(STATE_NONE);
 		if (mConnectThread != null) {
 			mConnectThread.cancel();
@@ -188,16 +192,32 @@ public class BluetoothService {
         }  
     }  
   
-    //反射来调用BluetoothDevice.removeBond取消设备的配对  
-    private static void unpairDevice(BluetoothDevice device) {  
-        try {  
-            Method m = device.getClass().getMethod("removeBond", (Class[]) null);  
-            m.invoke(device, (Object[]) null);  
-        } catch (Exception e) {  
-            Log.e(TAG, "unpairDevice" + e.getMessage());  
-        }  
-    }  
-	
+    //反射来调用BluetoothDevice.removeBond取消设备的配对
+    private static void unpairDevice(BluetoothDevice device) {
+        try {
+            Method m = device.getClass().getMethod("removeBond", (Class[]) null);
+            m.invoke(device, (Object[]) null);
+        } catch (Exception e) {
+            Log.e(TAG, "unpairDevice" + e.getMessage());
+        }
+    }
+    
+    @SuppressLint("NewApi") 
+    public synchronized void autoConnect(String address) {
+    	if (mAdapter.isDiscovering())
+    		mAdapter.cancelDiscovery();
+    	BluetoothDevice btDev = mAdapter.getRemoteDevice(address);
+    	try { 
+            if (btDev.getBondState() == BluetoothDevice.BOND_NONE) {
+                btDev.createBond();
+            } else if(btDev.getBondState() == BluetoothDevice.BOND_BONDED) {
+                connect(btDev);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
 	/**
 	 * 发送消息
 	 * @param message

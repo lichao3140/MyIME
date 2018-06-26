@@ -206,8 +206,7 @@ public class ConnectActivity extends Activity implements OnClickListener {
 				String address = data.getExtras().getString(
 						DeviceListActivity.EXTRA_DEVICE_ADDRESS);
 				// 得到蓝牙对象
-				BluetoothDevice device = mBluetoothAdapter
-						.getRemoteDevice(address);
+				BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
 				// 开始连接设备
 				mChatService.connect(device);
 			}

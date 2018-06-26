@@ -103,8 +103,7 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 		super.onStart();
 		// 判断蓝牙是否打开，，没打开则弹出蓝牙提示打开蓝牙对话框
 		if (!mBluetoothAdapter.isEnabled()) {
-			Intent enableIntent = new Intent(
-					BluetoothAdapter.ACTION_REQUEST_ENABLE);
+			Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 			startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
 		} else {
 			if (mChatService == null) {
@@ -179,8 +178,12 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 			startActivity(input);
 			break;
 		case R.id.bt_open:
-			Intent bluetooth = new Intent(
-					android.provider.Settings.ACTION_BLUETOOTH_SETTINGS);
+			if (!mBluetoothAdapter.isEnabled()) {
+				mBluetoothAdapter.enable();
+			} else {
+				mBluetoothAdapter.startDiscovery();
+			}
+			Intent bluetooth = new Intent(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS);
 			startActivity(bluetooth);
 			break;
 		case R.id.bt_select:
@@ -279,11 +282,9 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 			// 当DeviceListActivity返回与设备连接的消息
 			if (resultCode == Activity.RESULT_OK) {
 				// 连接设备的MAC地址
-				String address = data.getExtras().getString(
-						DeviceListActivity.EXTRA_DEVICE_ADDRESS);
+				String address = data.getExtras().getString(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
 				// 得到蓝牙对象
-				BluetoothDevice device = mBluetoothAdapter
-						.getRemoteDevice(address);
+				BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
 				// 开始连接设备
 				mChatService.connect(device);
 			}

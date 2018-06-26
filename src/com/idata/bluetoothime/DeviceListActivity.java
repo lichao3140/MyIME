@@ -8,6 +8,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -114,16 +115,13 @@ public class DeviceListActivity extends Activity {
 
 			if (BluetoothDevice.ACTION_FOUND.equals(action)) {
 				Log.e(TAG, "----ACTION_FOUND---");
-				BluetoothDevice device = intent
-						.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+				BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 				if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
 					if(!TextUtils.isEmpty(device.getName())){
-						if(device.getName().equals("小米手机")){
+						if(device.getName().equals("SpecCodeED")) {
 							Log.e(TAG, "----device.getName():"+device.getName());
-							mNewDevicesAdapter.add(device.getName() + "\n"
-									+ device.getAddress());
+							mNewDevicesAdapter.add(device.getName() + "\n" + device.getAddress());
 						}
-					
 					}
 				}
 			} else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
@@ -131,8 +129,7 @@ public class DeviceListActivity extends Activity {
 				setProgressBarIndeterminateVisibility(false);
 				setTitle(R.string.select_device);
 				if (mNewDevicesAdapter.getCount() == 0) {
-					String noDevices = getResources().getText(
-							R.string.none_found_device).toString();
+					String noDevices = getResources().getText(R.string.none_found_device).toString();
 					mNewDevicesAdapter.add(noDevices);
 				}
 			}
@@ -144,6 +141,10 @@ public class DeviceListActivity extends Activity {
 			mBtAdapter.cancelDiscovery();
 			String info = ((TextView) v).getText().toString();
 			String address = info.substring(info.length() - 17);
+			SharedPreferences.Editor editor=getSharedPreferences("device", MODE_PRIVATE).edit();  
+		    editor.putString("address", address);  
+		    editor.commit();
+		    Log.e("lichao", "MAC Save===" + address);
 			Intent intent = new Intent();
 			intent.putExtra(EXTRA_DEVICE_ADDRESS, address);
 			setResult(Activity.RESULT_OK, intent);
