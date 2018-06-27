@@ -141,7 +141,7 @@ public class DeviceListActivity extends Activity {
 			mBtAdapter.cancelDiscovery();
 			String info = ((TextView) v).getText().toString();
 			String address = info.substring(info.length() - 17);
-			SharedPreferences.Editor editor=getSharedPreferences("device", MODE_PRIVATE).edit();  
+			SharedPreferences.Editor editor = getSharedPreferences("device", MODE_PRIVATE).edit();  
 		    editor.putString("address", address);  
 		    editor.commit();
 		    Log.e("lichao", "MAC Save===" + address);
@@ -152,4 +152,9 @@ public class DeviceListActivity extends Activity {
 		}
 	};
 
+	public String getSPData() {
+		SharedPreferences pref = getSharedPreferences("device", MODE_PRIVATE);
+        String deviceAddress = pref.getString("address", "");
+		return deviceAddress;
+	}
 }

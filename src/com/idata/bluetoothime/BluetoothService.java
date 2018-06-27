@@ -12,7 +12,6 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -56,6 +55,7 @@ public class BluetoothService {
     private int Error_Num = 0;
     private int Num = 30; //因为每1分钟检测一次，2次就是2分钟
     private int Interval = 8000; //重连时间间隔 60S
+    private String remote_ble_address = null; //用于存储已连接蓝牙的地址
 	
 	public BluetoothService(Context context, Handler handler) {
 		mAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -135,7 +135,7 @@ public class BluetoothService {
 	 */
 	public synchronized void connected(BluetoothSocket socket, BluetoothDevice device) {
 		Log.e(TAG, "确认蓝牙配对 ");
-
+		remote_ble_address = device.getAddress();
 		// Cancel any thread attempting to make a connection
 		if (mConnectThread != null) {
 			mConnectThread.cancel();
@@ -511,7 +511,7 @@ public class BluetoothService {
 				case 1: //重连
 					//建立客户端的socket
                     try {
-                    	mmDevice = mAdapter.getRemoteDevice("AA:A8:AC:10:87:8F");
+                    	mmDevice = mAdapter.getRemoteDevice(remote_ble_address);
                         mmSocket = mmDevice.createRfcommSocketToServiceRecord(MY_UUID);
                         mmSocket.connect();
                     } catch (IOException e) {
