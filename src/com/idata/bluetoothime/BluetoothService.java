@@ -31,12 +31,13 @@ public class BluetoothService {
 
 	// 将蓝牙模拟成串口的服务，声明一个唯一的UUID
 	private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-
+	
 	private static BluetoothAdapter mAdapter;
 	private final Handler mHandler;
 	private AcceptThread mAcceptThread;
 	private ConnectThread mConnectThread;
 	private ConnectedThread mConnectedThread;
+	private WatchServerSocketThread wsst;
 	private int mState;
 	PinyinIME ss = new PinyinIME();
 
@@ -46,6 +47,14 @@ public class BluetoothService {
 	public static final int STATE_LISTEN = 1;
 	public static final int STATE_CONNECTING = 2;
 	public static final int STATE_CONNECTED = 3;
+	
+    private int conn_status = 0;
+    private boolean BleIsOKFlag = false;
+    private boolean ServerSocketIsClose = false;
+    private int Conn_Error_Num = 0;
+    private int Error_Num = 0;
+    private int Num = 30; //因为每1分钟检测一次，2次就是2分钟
+    private int Interval = 8000; //重连时间间隔 60S
 	
 	public BluetoothService(Context context, Handler handler) {
 		mAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -115,6 +124,8 @@ public class BluetoothService {
 
 		mConnectThread = new ConnectThread(device);
 		mConnectThread.start();
+		wsst = new WatchServerSocketThread();
+		wsst.start();
 		setState(STATE_CONNECTING);
 	}
 
@@ -144,6 +155,7 @@ public class BluetoothService {
 		// Start the thread to connect with the given device
 		mConnectedThread = new ConnectedThread(socket);
 		mConnectedThread.start();
+		BleIsOKFlag = true;
 		// 连接成功，通知activity
 		Message msg = mHandler.obtainMessage(ConnectActivity.MESSAGE_DEVICE_NAME);
 		Bundle bundle = new Bundle();
@@ -202,22 +214,6 @@ public class BluetoothService {
         }
     }
     
-    @SuppressLint("NewApi") 
-    public synchronized void autoConnect(String address) {
-    	if (mAdapter.isDiscovering())
-    		mAdapter.cancelDiscovery();
-    	BluetoothDevice btDev = mAdapter.getRemoteDevice(address);
-    	try { 
-            if (btDev.getBondState() == BluetoothDevice.BOND_NONE) {
-                btDev.createBond();
-            } else if(btDev.getBondState() == BluetoothDevice.BOND_BONDED) {
-                connect(btDev);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    
 	/**
 	 * 发送消息
 	 * @param message
@@ -260,6 +256,7 @@ public class BluetoothService {
 	 * 设备断开连接，通知Activity
 	 */
 	private void connectionLost() {
+		ServerSocketIsClose = true;
 		Message msg = mHandler.obtainMessage(ConnectActivity.MESSAGE_TOAST);
 		Bundle bundle = new Bundle();
 		bundle.putString(ConnectActivity.TOAST, "设备断开连接");
@@ -430,7 +427,6 @@ public class BluetoothService {
 					} else {
 						Log.e(TAG, "disconnected");
 						connectionLost();
-
 						if (mState != STATE_NONE) {
 							Log.e(TAG, "disconnected");
 							startChat();
@@ -440,7 +436,6 @@ public class BluetoothService {
 				} catch (IOException e) {
 					Log.e(TAG, "disconnected" + e);
 					connectionLost();
-
 					if (mState != STATE_NONE) {
 						// 在重新启动监听模式启动该服务
 						startChat();
@@ -488,5 +483,57 @@ public class BluetoothService {
 			ret += hex.toUpperCase();
 		}
 		return ret;
+	}
+	
+	/**
+	 * 监听服务器socket线程——检测对方设备是否主动断开蓝牙连接
+	 * @author DELL
+	 *
+	 */
+	class WatchServerSocketThread extends Thread {
+		private BluetoothSocket mmSocket;
+		private BluetoothDevice mmDevice;
+	    
+		@Override
+		public void run() {
+			while(true) {
+				switch (conn_status) {
+				case 0: //检测
+                    if (BleIsOKFlag && ServerSocketIsClose) {
+                        //已经确认是连接断开
+                        ServerSocketIsClose = false;
+                        Log.e("lichao", "===未连接");
+                        conn_status = 1;
+                    }
+                    break;
+                    
+				case 1: //重连
+					//建立客户端的socket
+                    try {
+                        mmSocket = mmDevice.createRfcommSocketToServiceRecord(MY_UUID);
+                        mmSocket.connect();
+                    } catch (IOException e) {
+                        Error_Num++;
+                        if(Error_Num > Num) {
+                            Error_Num = 0;
+                            Conn_Error_Num++;
+                        }
+                        e.printStackTrace();
+                        //注意注意[既然没连接成功，没必要执行下面的代码了]
+                        continue;
+                    }
+                    
+                    Error_Num = 0;
+                    Log.e("lichao", "===已连接");
+                    //再次检测
+                    conn_status = 0;
+					break;
+				
+				default: //默认
+                    System.out.print("nothing to do...");
+                    break;
+				}
+			}
+		}
 	}
 }

@@ -70,6 +70,7 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 			finish();
 			return;
 		}
+		
 	}
 
 	private void init() {
@@ -160,8 +161,7 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 				break;
 			case MESSAGE_TOAST:
 				Toast.makeText(getApplicationContext(),
-						msg.getData().getString(TOAST), Toast.LENGTH_SHORT)
-						.show();
+						msg.getData().getString(TOAST), Toast.LENGTH_SHORT).show();
 				break;
 			}
 		}
@@ -348,4 +348,5 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 		super.onDestroy();
 		Log.e(TAG, "IDataSettingActivity----onDestroy()");
 	}
+	
 }

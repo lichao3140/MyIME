@@ -7,7 +7,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-
+/**
+ * 自动配对广播类
+ * @author DELL
+ *
+ */
 public class BluetoothReceiver extends BroadcastReceiver{
 
 	String pin = "1234";  //此处为你要连接的蓝牙设备的初始密钥，一般为1234或0000
