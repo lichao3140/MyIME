@@ -12,6 +12,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -510,6 +511,7 @@ public class BluetoothService {
 				case 1: //重连
 					//建立客户端的socket
                     try {
+                    	mmDevice = mAdapter.getRemoteDevice("AA:A8:AC:10:87:8F");
                         mmSocket = mmDevice.createRfcommSocketToServiceRecord(MY_UUID);
                         mmSocket.connect();
                     } catch (IOException e) {
@@ -524,6 +526,8 @@ public class BluetoothService {
                     }
                     
                     Error_Num = 0;
+                    startChat();
+                    connected(mmSocket, mmDevice);
                     Log.e("lichao", "===已连接");
                     //再次检测
                     conn_status = 0;
