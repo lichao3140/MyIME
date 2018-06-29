@@ -150,7 +150,7 @@ public class IDataSettingActivity extends Activity implements OnClickListener {
 				String readMessage = new String(readBuf, 0, msg.arg1);
 				// mConversationArrayAdapter.add(mConnectedDeviceName + ":  " +
 				// readMessage);
-				Log.e("lichao", "收到消息" + readMessage);
+				//Log.e("lichao", "收到消息" + readMessage);
 				break;
 			case MESSAGE_DEVICE_NAME:
 				// 保存连接设备的名字

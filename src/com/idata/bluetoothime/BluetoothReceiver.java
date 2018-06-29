@@ -9,7 +9,7 @@ import android.util.Log;
 
 /**
  * 自动配对广播类
- * @author DELL
+ * @author LiChao
  *
  */
 public class BluetoothReceiver extends BroadcastReceiver{
@@ -32,7 +32,7 @@ public class BluetoothReceiver extends BroadcastReceiver{
 		if(BluetoothDevice.ACTION_FOUND.equals(action)){  //发现设备
 			Log.e("发现设备:", "["+btDevice.getName()+"]"+":"+btDevice.getAddress());
 			
-			if(btDevice.getName().contains("SpecCodeED")) { //%%SpecCodeEDSPP设备如果有多个，第一个搜到的那个会被尝试。
+			if(btDevice.getName().contains("SPP")) { //设备如果有多个，第一个搜到的那个会被尝试。
 				if (btDevice.getBondState() == BluetoothDevice.BOND_NONE) {
 					Log.e("lichao", "attemp to bond:"+"["+btDevice.getName()+"]");
 					try {
@@ -47,7 +47,7 @@ public class BluetoothReceiver extends BroadcastReceiver{
 		}else if(action.equals("android.bluetooth.device.action.PAIRING_REQUEST")) //再次得到的action，会等于PAIRING_REQUEST
 		{
 			Log.e("action2=", action);
-			if(btDevice.getName().contains("SpecCodeED")) {
+			if(btDevice.getName().contains("SPP")) {
 				Log.e("here", "OKOKOK");
 				try {
 					//1.确认配对

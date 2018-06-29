@@ -258,7 +258,7 @@ public class PinyinIME extends InputMethodService {
 	 * @param text
 	 */
 	public void SetText(CharSequence text) {
-		Log.e("lichao", "PinyinIME->SetText->text=" + text);
+		//Log.e("lichao", "PinyinIME->SetText->text=" + text);
 		InputConnection ic = getCurrentInputConnection();
 		if (ic == null)
 			return;

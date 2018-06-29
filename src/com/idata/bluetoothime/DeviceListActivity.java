@@ -118,7 +118,7 @@ public class DeviceListActivity extends Activity {
 				BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 				if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
 					if(!TextUtils.isEmpty(device.getName())){
-						if(device.getName().equals("SpecCodeED")) {
+						if(device.getName().contains("SPP")) {
 							Log.e(TAG, "----device.getName():"+device.getName());
 							mNewDevicesAdapter.add(device.getName() + "\n" + device.getAddress());
 						}

@@ -409,15 +409,18 @@ public class BluetoothService {
 			// 循环监听消息
 			while (true) {
 				try {
-					byte[] buffer = new byte[256];
+					byte[] buffer = new byte[1024];
 					bytes = mmInStream.read(buffer);
 					String readStr = new String(buffer, 0, bytes);// 字节数组直接转换成字符串
 					String str = bytes2HexString(buffer).replaceAll("00", "").trim();
 					String im = android.provider.Settings.Secure.getString(ApplicationContext.getInstance().getContentResolver(),
 			                android.provider.Settings.Secure.DEFAULT_INPUT_METHOD);
 					
-					Log.e("lichao", "BluetoothChatService->readStr=" + readStr);
+					//Log.e("lichao", "BluetoothChatService->readStr=" + readStr);
+					//我国自主知识产权二维条码—汉信码
 					Log.e("lichao", "BluetoothChatService->str=" + str);
+					String result = "E68891E59BBDE887AAE4B8BBE79FA5E8AF86E4BAA7E69D83E4BA8CE7BBB4E69DA1E7A081E28094E6B189E4BFA1E7A0810D0D";
+					Log.e("lichao", "转换:" + hexStr2Str(result));
 					if (bytes > 0) {// 将读取到的消息发到主线程
 						mHandler.obtainMessage(
 								ConnectActivity.MESSAGE_READ, bytes, -1,
@@ -484,6 +487,24 @@ public class BluetoothService {
 			ret += hex.toUpperCase();
 		}
 		return ret;
+	}
+	
+	/**
+	 * 16进制直接转换成为字符串(无需Unicode解码)
+	 * @param hexStr
+	 * @return
+	 */
+	public static String hexStr2Str(String hexStr) {
+	    String str = "0123456789ABCDEF";
+	    char[] hexs = hexStr.toCharArray();
+	    byte[] bytes = new byte[hexStr.length() / 2];
+	    int n;
+	    for (int i = 0; i < bytes.length; i++) {
+	        n = str.indexOf(hexs[2 * i]) * 16;
+	        n += str.indexOf(hexs[2 * i + 1]);
+	        bytes[i] = (byte) (n & 0xff);
+	    }
+	    return new String(bytes);
 	}
 	
 	/**
