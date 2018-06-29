@@ -406,21 +406,22 @@ public class BluetoothService {
 		}
 		public void run() {
 			int bytes;
+			String im = android.provider.Settings.Secure.getString(ApplicationContext.getInstance().getContentResolver(),
+	                android.provider.Settings.Secure.DEFAULT_INPUT_METHOD);
 			// 循环监听消息
 			while (true) {
 				try {
+					String result = "";
 					byte[] buffer = new byte[1024];
 					bytes = mmInStream.read(buffer);
 					String readStr = new String(buffer, 0, bytes);// 字节数组直接转换成字符串
 					String str = bytes2HexString(buffer).replaceAll("00", "").trim();
-					String im = android.provider.Settings.Secure.getString(ApplicationContext.getInstance().getContentResolver(),
-			                android.provider.Settings.Secure.DEFAULT_INPUT_METHOD);
 					
 					//Log.e("lichao", "BluetoothChatService->readStr=" + readStr);
 					//我国自主知识产权二维条码—汉信码
 					Log.e("lichao", "BluetoothChatService->str=" + str);
-					String result = "E68891E59BBDE887AAE4B8BBE79FA5E8AF86E4BAA7E69D83E4BA8CE7BBB4E69DA1E7A081E28094E6B189E4BFA1E7A0810D0D";
-					Log.e("lichao", "转换:" + hexStr2Str(result));
+					result = result + str;
+					Log.e("lichao", "拼接:" + result);
 					if (bytes > 0) {// 将读取到的消息发到主线程
 						mHandler.obtainMessage(
 								ConnectActivity.MESSAGE_READ, bytes, -1,
@@ -437,7 +438,9 @@ public class BluetoothService {
 						}
 						break;
 					}
-				} catch (IOException e) {
+					Thread.sleep(2 * 1000);
+					result = "";
+				} catch (Exception e) {
 					Log.e(TAG, "disconnected" + e);
 					connectionLost();
 					if (mState != STATE_NONE) {
