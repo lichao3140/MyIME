@@ -53,8 +53,7 @@ public class BluetoothService {
     private boolean ServerSocketIsClose = false;
     private int Conn_Error_Num = 0;
     private int Error_Num = 0;
-    private int Num = 30; //因为每1分钟检测一次，2次就是2分钟
-    private int Interval = 8000; //重连时间间隔 60S
+    private int Num = 30; //因为每30分钟检测一次，2次就是1分钟
     private String remote_ble_address = null; //用于存储已连接蓝牙的地址
 	
 	public BluetoothService(Context context, Handler handler) {
@@ -101,6 +100,7 @@ public class BluetoothService {
 			mAcceptThread = new AcceptThread();
 			mAcceptThread.start();
 		}
+		
 		setState(STATE_LISTEN);
 	}
 
@@ -404,24 +404,34 @@ public class BluetoothService {
 			mmInStream = tmpIn;
 			mmOutStream = tmpOut;
 		}
+		
 		public void run() {
 			int bytes;
+			int free_num = 0;
 			String im = android.provider.Settings.Secure.getString(ApplicationContext.getInstance().getContentResolver(),
 	                android.provider.Settings.Secure.DEFAULT_INPUT_METHOD);
 			// 循环监听消息
 			while (true) {
 				try {
-					String result = "";
 					byte[] buffer = new byte[1024];
+					if (mmInStream.available() >0 == false) {
+						free_num++;
+						//Log.e("lichao", "free_num=" + free_num);
+						if (free_num > 1900000) {
+							free_num = 0;
+							connectionLost();
+						}
+						continue;
+					} else {
+						free_num = 0;
+						Thread.sleep(500);
+					}
 					bytes = mmInStream.read(buffer);
 					String readStr = new String(buffer, 0, bytes);// 字节数组直接转换成字符串
 					String str = bytes2HexString(buffer).replaceAll("00", "").trim();
 					
-					//Log.e("lichao", "BluetoothChatService->readStr=" + readStr);
-					//我国自主知识产权二维条码—汉信码
-					Log.e("lichao", "BluetoothChatService->str=" + str);
-					result = result + str;
-					Log.e("lichao", "拼接:" + result);
+					Log.e("lichao", "BluetoothChatService->readStr=" + readStr);
+					//Log.e("lichao", "BluetoothChatService->str=" + str);
 					if (bytes > 0) {// 将读取到的消息发到主线程
 						mHandler.obtainMessage(
 								ConnectActivity.MESSAGE_READ, bytes, -1,
@@ -438,8 +448,6 @@ public class BluetoothService {
 						}
 						break;
 					}
-					Thread.sleep(2 * 1000);
-					result = "";
 				} catch (Exception e) {
 					Log.e(TAG, "disconnected" + e);
 					connectionLost();
@@ -543,6 +551,7 @@ public class BluetoothService {
                         if(Error_Num > Num) {
                             Error_Num = 0;
                             Conn_Error_Num++;
+                            Log.i("lichao", "连接错误次数:" + Conn_Error_Num);
                         }
                         e.printStackTrace();
                         //注意注意[既然没连接成功，没必要执行下面的代码了]
@@ -553,7 +562,8 @@ public class BluetoothService {
                     startChat();
                     connected(mmSocket, mmDevice);
                     Log.e("lichao", "===已连接");
-                    //再次检测
+                    Conn_Error_Num = 0;
+                    //再次检测            
                     conn_status = 0;
 					break;
 				
@@ -564,4 +574,5 @@ public class BluetoothService {
 			}
 		}
 	}
+	
 }
