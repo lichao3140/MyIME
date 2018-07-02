@@ -551,7 +551,7 @@ public class BluetoothService {
                         if(Error_Num > Num) {
                             Error_Num = 0;
                             Conn_Error_Num++;
-                            Log.i("lichao", "连接错误次数:" + Conn_Error_Num);
+                            //Log.i("lichao", "连接错误次数:" + Conn_Error_Num);
                         }
                         e.printStackTrace();
                         //注意注意[既然没连接成功，没必要执行下面的代码了]
