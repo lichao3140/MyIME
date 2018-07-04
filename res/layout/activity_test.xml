@@ -17,8 +17,9 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1.0"
-            android:ems="10"
-            android:hint="@string/BeginTest" >
+            android:hint="@string/BeginTest"
+            android:inputType="textMultiLine" >
+
             <requestFocus />
         </EditText>
     </LinearLayout>

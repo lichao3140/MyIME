@@ -20,7 +20,7 @@ import android.util.Log;
 /**
  * 描述：蓝牙服务核心类
  */
-@SuppressLint("Instantiatable") 
+@SuppressLint("Instantiatable")
 public class BluetoothService {
 	private final static String TAG = "BluetoothService";
 	private static final boolean D = true;
@@ -30,8 +30,9 @@ public class BluetoothService {
 	private static final String INPUT_MOTHOD = "com.idata.bluetoothime/.PinyinIME";
 
 	// 将蓝牙模拟成串口的服务，声明一个唯一的UUID
-	private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-	
+	private static final UUID MY_UUID = UUID
+			.fromString("00001101-0000-1000-8000-00805F9B34FB");
+
 	private static BluetoothAdapter mAdapter;
 	private final Handler mHandler;
 	private AcceptThread mAcceptThread;
@@ -47,15 +48,15 @@ public class BluetoothService {
 	public static final int STATE_LISTEN = 1;
 	public static final int STATE_CONNECTING = 2;
 	public static final int STATE_CONNECTED = 3;
-	
-    private int conn_status = 0;
-    private boolean BleIsOKFlag = false;
-    private boolean ServerSocketIsClose = false;
-    private int Conn_Error_Num = 0;
-    private int Error_Num = 0;
-    private int Num = 30; //因为每30分钟检测一次，2次就是1分钟
-    private String remote_ble_address = null; //用于存储已连接蓝牙的地址
-	
+
+	private int conn_status = 0;
+	private boolean BleIsOKFlag = false;
+	private boolean ServerSocketIsClose = false;
+	private int Conn_Error_Num = 0;
+	private int Error_Num = 0;
+	private int Num = 30; // 因为每30分钟检测一次，2次就是1分钟
+	private String remote_ble_address = null; // 用于存储已连接蓝牙的地址
+
 	public BluetoothService(Context context, Handler handler) {
 		mAdapter = BluetoothAdapter.getDefaultAdapter();
 		mState = STATE_NONE;
@@ -64,12 +65,15 @@ public class BluetoothService {
 
 	/**
 	 * 设置当前蓝牙的连接状态
-	 * @param state 连接状态
+	 * 
+	 * @param state
+	 *            连接状态
 	 */
 	private synchronized void setState(int state) {
 		mState = state;
 		// 通知Activity更新UI
-		mHandler.obtainMessage(ConnectActivity.MESSAGE_STATE_CHANGE, state, -1).sendToTarget();
+		mHandler.obtainMessage(ConnectActivity.MESSAGE_STATE_CHANGE, state, -1)
+				.sendToTarget();
 	}
 
 	/**
@@ -100,16 +104,18 @@ public class BluetoothService {
 			mAcceptThread = new AcceptThread();
 			mAcceptThread.start();
 		}
-		
+
 		setState(STATE_LISTEN);
 	}
 
 	/**
 	 * 连接远程设备
-	 * @param device 连接蓝牙
+	 * 
+	 * @param device
+	 *            连接蓝牙
 	 */
 	public synchronized void connect(BluetoothDevice device) {
-		if (D) 
+		if (D)
 			Log.d(TAG, "connect to: " + device);
 		if (mState == STATE_CONNECTING) {
 			if (mConnectThread != null) {
@@ -133,7 +139,8 @@ public class BluetoothService {
 	/**
 	 * 启动ConnectedThread开始管理一个蓝牙连接
 	 */
-	public synchronized void connected(BluetoothSocket socket, BluetoothDevice device) {
+	public synchronized void connected(BluetoothSocket socket,
+			BluetoothDevice device) {
 		Log.e(TAG, "确认蓝牙配对 ");
 		remote_ble_address = device.getAddress();
 		// Cancel any thread attempting to make a connection
@@ -158,7 +165,8 @@ public class BluetoothService {
 		mConnectedThread.start();
 		BleIsOKFlag = true;
 		// 连接成功，通知activity
-		Message msg = mHandler.obtainMessage(ConnectActivity.MESSAGE_DEVICE_NAME);
+		Message msg = mHandler
+				.obtainMessage(ConnectActivity.MESSAGE_DEVICE_NAME);
 		Bundle bundle = new Bundle();
 		bundle.putString(ConnectActivity.DEVICE_NAME, device.getName());
 		msg.setData(bundle);
@@ -186,37 +194,39 @@ public class BluetoothService {
 			mAcceptThread = null;
 		}
 	}
-	
+
 	public static void discoverDevice() {
-		//如果正在扫描，先停止扫描，再重新扫描
+		// 如果正在扫描，先停止扫描，再重新扫描
 		if (mAdapter.isDiscovering()) {
 			mAdapter.cancelDiscovery();
 		}
 		mAdapter.startDiscovery();
 	}
-	
-	//得到配对的设备列表，清除已配对的设备  
-    public static void removePairDevice() {  
-        if(mAdapter != null){  
-            Set<BluetoothDevice> bondedDevices = mAdapter.getBondedDevices();  
-            for(BluetoothDevice device : bondedDevices ){  
-                    unpairDevice(device);  
-            }  
-        }  
-    }  
-  
-    //反射来调用BluetoothDevice.removeBond取消设备的配对
-    private static void unpairDevice(BluetoothDevice device) {
-        try {
-            Method m = device.getClass().getMethod("removeBond", (Class[]) null);
-            m.invoke(device, (Object[]) null);
-        } catch (Exception e) {
-            Log.e(TAG, "unpairDevice" + e.getMessage());
-        }
-    }
-    
+
+	// 得到配对的设备列表，清除已配对的设备
+	public static void removePairDevice() {
+		if (mAdapter != null) {
+			Set<BluetoothDevice> bondedDevices = mAdapter.getBondedDevices();
+			for (BluetoothDevice device : bondedDevices) {
+				unpairDevice(device);
+			}
+		}
+	}
+
+	// 反射来调用BluetoothDevice.removeBond取消设备的配对
+	private static void unpairDevice(BluetoothDevice device) {
+		try {
+			Method m = device.getClass()
+					.getMethod("removeBond", (Class[]) null);
+			m.invoke(device, (Object[]) null);
+		} catch (Exception e) {
+			Log.e(TAG, "unpairDevice" + e.getMessage());
+		}
+	}
+
 	/**
 	 * 发送消息
+	 * 
 	 * @param message
 	 */
 	public void sendMessage(String message) {
@@ -274,7 +284,8 @@ public class BluetoothService {
 		public AcceptThread() {
 			BluetoothServerSocket tmp = null;
 			try {
-				tmp = mAdapter.listenUsingRfcommWithServiceRecord(NAME, MY_UUID);
+				tmp = mAdapter
+						.listenUsingRfcommWithServiceRecord(NAME, MY_UUID);
 			} catch (IOException e) {
 				Log.e(TAG, "--获取socket失败:" + e);
 			}
@@ -365,7 +376,7 @@ public class BluetoothService {
 				startChat();
 				return;
 			}
-			
+
 			synchronized (BluetoothService.this) {
 				mConnectThread = null;
 			}
@@ -388,9 +399,11 @@ public class BluetoothService {
 		private final BluetoothSocket mmSocket;
 		private final InputStream mmInStream;
 		private final OutputStream mmOutStream;
+		private boolean iSExit = false;
 
 		public ConnectedThread(BluetoothSocket socket) {
 			mmSocket = socket;
+			iSExit = false;
 			InputStream tmpIn = null;
 			OutputStream tmpOut = null;
 			// 得到BluetoothSocket输入和输出流
@@ -404,38 +417,41 @@ public class BluetoothService {
 			mmInStream = tmpIn;
 			mmOutStream = tmpOut;
 		}
-		
+
 		public void run() {
 			int bytes;
-			int free_num = 0;
-			String im = android.provider.Settings.Secure.getString(ApplicationContext.getInstance().getContentResolver(),
-	                android.provider.Settings.Secure.DEFAULT_INPUT_METHOD);
+			String im = android.provider.Settings.Secure.getString(
+					ApplicationContext.getInstance().getContentResolver(),
+					android.provider.Settings.Secure.DEFAULT_INPUT_METHOD);
 			// 循环监听消息
 			while (true) {
 				try {
 					byte[] buffer = new byte[1024];
-					if (mmInStream.available() >0 == false) {
-						free_num++;
-						//Log.e("lichao", "free_num=" + free_num);
-						if (free_num > 1900000) {
-							free_num = 0;
-							connectionLost();
+					// 此方法分段传输，快速扫描有bug
+					// if (mmInStream.available() >0 == false) {
+					// continue;
+					// } else {
+					// Thread.sleep(500);
+					// }
+					// bytes = mmInStream.read(buffer);
+
+					// 此方法蓝牙枪要设置结尾添加回车换行
+					int len = 0;
+					while (!iSExit) {
+						bytes = mmInStream.read(buffer, len, 1);
+						if (buffer[len] == 0xA) {
+							break;
 						}
-						continue;
-					} else {
-						free_num = 0;
-						Thread.sleep(500);
+						len++;
 					}
-					bytes = mmInStream.read(buffer);
-					String readStr = new String(buffer, 0, bytes);// 字节数组直接转换成字符串
+					String readStr = new String(buffer, 0, len) + "\r\n";// 字节数组直接转换成字符串
 					String str = bytes2HexString(buffer).replaceAll("00", "").trim();
-					
+
 					Log.e("lichao", "BluetoothChatService->readStr=" + readStr);
-					//Log.e("lichao", "BluetoothChatService->str=" + str);
-					if (bytes > 0) {// 将读取到的消息发到主线程
-						mHandler.obtainMessage(
-								ConnectActivity.MESSAGE_READ, bytes, -1,
-								buffer).sendToTarget();
+
+					if (len > 0) {// 将读取到的消息发到主线程
+						mHandler.obtainMessage(ConnectActivity.MESSAGE_READ,
+								len, -1, buffer).sendToTarget();
 						if (im.equals(INPUT_MOTHOD)) {
 							ss.pinyinIME.SetText(readStr);
 						}
@@ -462,15 +478,17 @@ public class BluetoothService {
 
 		/**
 		 * 写入OutStream连接
-		 * @param buffer 要写的字节
+		 * 
+		 * @param buffer
+		 *            要写的字节
 		 */
 		public void write(byte[] buffer) {
 			try {
 				mmOutStream.write(buffer);
-				
+
 				// 把消息传给UI
-				mHandler.obtainMessage(ConnectActivity.MESSAGE_WRITE, -1,
-						-1, buffer).sendToTarget();
+				mHandler.obtainMessage(ConnectActivity.MESSAGE_WRITE, -1, -1,
+						buffer).sendToTarget();
 			} catch (IOException e) {
 				Log.e(TAG, "Exception during write:" + e);
 			}
@@ -478,6 +496,7 @@ public class BluetoothService {
 
 		public void cancel() {
 			try {
+				iSExit = true;
 				mmSocket.close();
 			} catch (IOException e) {
 				Log.e(TAG, "close() of connect socket failed:" + e);
@@ -499,80 +518,83 @@ public class BluetoothService {
 		}
 		return ret;
 	}
-	
+
 	/**
 	 * 16进制直接转换成为字符串(无需Unicode解码)
+	 * 
 	 * @param hexStr
 	 * @return
 	 */
 	public static String hexStr2Str(String hexStr) {
-	    String str = "0123456789ABCDEF";
-	    char[] hexs = hexStr.toCharArray();
-	    byte[] bytes = new byte[hexStr.length() / 2];
-	    int n;
-	    for (int i = 0; i < bytes.length; i++) {
-	        n = str.indexOf(hexs[2 * i]) * 16;
-	        n += str.indexOf(hexs[2 * i + 1]);
-	        bytes[i] = (byte) (n & 0xff);
-	    }
-	    return new String(bytes);
+		String str = "0123456789ABCDEF";
+		char[] hexs = hexStr.toCharArray();
+		byte[] bytes = new byte[hexStr.length() / 2];
+		int n;
+		for (int i = 0; i < bytes.length; i++) {
+			n = str.indexOf(hexs[2 * i]) * 16;
+			n += str.indexOf(hexs[2 * i + 1]);
+			bytes[i] = (byte) (n & 0xff);
+		}
+		return new String(bytes);
 	}
-	
+
 	/**
 	 * 监听服务器socket线程——检测对方设备是否主动断开蓝牙连接
+	 * 
 	 * @author DELL
-	 *
+	 * 
 	 */
 	class WatchServerSocketThread extends Thread {
 		private BluetoothSocket mmSocket;
 		private BluetoothDevice mmDevice;
-	    
+
 		@Override
 		public void run() {
-			while(true) {
+			while (true) {
 				switch (conn_status) {
-				case 0: //检测
-                    if (BleIsOKFlag && ServerSocketIsClose) {
-                        //已经确认是连接断开
-                        ServerSocketIsClose = false;
-                        Log.e("lichao", "===未连接");
-                        conn_status = 1;
-                    }
-                    break;
-                    
-				case 1: //重连
-					//建立客户端的socket
-                    try {
-                    	mmDevice = mAdapter.getRemoteDevice(remote_ble_address);
-                        mmSocket = mmDevice.createRfcommSocketToServiceRecord(MY_UUID);
-                        mmSocket.connect();
-                    } catch (IOException e) {
-                        Error_Num++;
-                        if(Error_Num > Num) {
-                            Error_Num = 0;
-                            Conn_Error_Num++;
-                            //Log.i("lichao", "连接错误次数:" + Conn_Error_Num);
-                        }
-                        e.printStackTrace();
-                        //注意注意[既然没连接成功，没必要执行下面的代码了]
-                        continue;
-                    }
-                    
-                    Error_Num = 0;
-                    startChat();
-                    connected(mmSocket, mmDevice);
-                    Log.e("lichao", "===已连接");
-                    Conn_Error_Num = 0;
-                    //再次检测            
-                    conn_status = 0;
+				case 0: // 检测
+					if (BleIsOKFlag && ServerSocketIsClose) {
+						// 已经确认是连接断开
+						ServerSocketIsClose = false;
+						Log.e("lichao", "===未连接");
+						conn_status = 1;
+					}
 					break;
-				
-				default: //默认
-                    System.out.print("nothing to do...");
-                    break;
+
+				case 1: // 重连
+					// 建立客户端的socket
+					try {
+						mmDevice = mAdapter.getRemoteDevice(remote_ble_address);
+						mmSocket = mmDevice
+								.createRfcommSocketToServiceRecord(MY_UUID);
+						mmSocket.connect();
+					} catch (IOException e) {
+						Error_Num++;
+						if (Error_Num > Num) {
+							Error_Num = 0;
+							Conn_Error_Num++;
+							// Log.i("lichao", "连接错误次数:" + Conn_Error_Num);
+						}
+						e.printStackTrace();
+						// 注意注意[既然没连接成功，没必要执行下面的代码了]
+						continue;
+					}
+
+					Error_Num = 0;
+					startChat();
+					connected(mmSocket, mmDevice);
+					Log.e("lichao", "===已连接");
+					Conn_Error_Num = 0;
+					// 再次检测
+					conn_status = 0;
+					break;
+
+				default: // 默认
+					System.out.print("nothing to do...");
+					break;
 				}
 			}
 		}
 	}
-	
+
 }
